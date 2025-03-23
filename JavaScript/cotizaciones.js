@@ -1,9 +1,9 @@
 // cotizaciones.js
 
 (function() {
-    const apiKey = '55f56fac8fa6472cbbdd03b5'; // Tu clave de API de ExchangeRate-API
+    const apiKey = 'cur_live_dX9LiPubwTM71N0nPT1W39KyNr31nou2u5pnci9Z'; // Tu clave de API de Currencyapi
     const busquedaDivisa = document.getElementById('busqueda-divisa');
-    const resultadosBusqueda = document.getElementById('resultados-busqueda');
+    const resultadosBusqueda = document.getElementById('tabla-resultados-body'); // Modificado para la tabla de resultados
     const indicadorCarga = document.getElementById('indicador-carga');
     const mensajeError = document.getElementById('mensaje-error');
     const codigoDivisasValidos = ['AED', 'AFN', 'ALL', /* ... Lista completa de códigos ISO 4217 ... */ 'ZMW', 'ZWL']; // Lista de códigos ISO 4217
@@ -21,22 +21,11 @@
     // Función para formatear los resultados de la búsqueda
     function formatearResultado(codigoDivisa, precioUSD) {
         return `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Precio (USD)</th>
-                        <th>Detalles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${codigoDivisa}</td>
-                        <td>${precioUSD.toFixed(4)}</td>
-                        <td><a href="https://es.wikipedia.org/wiki/${codigoDivisa}" target="_blank">Ver en Wikipedia</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <td>${codigoDivisa}</td>
+                <td>${precioUSD.toFixed(4)}</td>
+                <td><a href="https://es.wikipedia.org/wiki/${codigoDivisa}" target="_blank">Ver en Wikipedia</a></td>
+            </tr>
         `;
     }
 
@@ -58,7 +47,7 @@
         limpiarError();
         indicadorCarga.style.display = 'block'; // Mostrar indicador de carga
 
-        const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+        const url = `https://api.currencyapi.com/v3/latest?apikey=${apiKey}&currencies=${codigoDivisa}&base_currency=USD`;
         const cacheKey = `divisa_${codigoDivisa}`;
         const cachedData = localStorage.getItem(cacheKey);
 
@@ -66,7 +55,7 @@
             const { data, timestamp } = JSON.parse(cachedData);
             if (Date.now() - timestamp < 3600000) { // 1 hora de expiración
                 indicadorCarga.style.display = 'none'; // Ocultar indicador de carga
-                resultadosBusqueda.innerHTML = formatearResultado(codigoDivisa, data.conversion_rates[codigoDivisa]);
+                resultadosBusqueda.innerHTML = formatearResultado(codigoDivisa, data[codigoDivisa].value);
                 return;
             }
         }
@@ -81,12 +70,13 @@
             if (!response.ok) {
                 throw new ApiError(`Error HTTP: ${response.status}`, response.status);
             }
-            const data = await response.json();
+            const dataJson = await response.json();
+            const data = dataJson.data;
 
             indicadorCarga.style.display = 'none'; // Ocultar indicador de carga
 
-            if (data.result === 'success' && data.conversion_rates && data.conversion_rates[codigoDivisa]) {
-                const precioUSD = data.conversion_rates[codigoDivisa];
+            if (data && data[codigoDivisa]) {
+                const precioUSD = data[codigoDivisa].value;
                 resultadosBusqueda.innerHTML = formatearResultado(codigoDivisa, precioUSD);
                 localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() })); // Almacenar en caché
             } else {
