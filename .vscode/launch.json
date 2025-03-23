@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Abrir en Chrome",
+        "url": "http://localhost:3000", // Cambia esto a la URL de tu página
+        "webRoot": "${workspaceFolder}" // Esta variable representa la raíz de tu proyecto en VSCode
+      }
+    ]
+  }
+  

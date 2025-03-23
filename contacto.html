@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | ConverTech</title>
+    <meta name="description" content="Página de contacto para ConverTech. Envíanos tu nombre, apellido, correo electrónico y mensaje. Conecta con nosotros a través de nuestro formulario de contacto.">
+    <meta name="keywords" content="contacto, formulario de contacto, nombre, apellido, correo electrónico, mensaje, atención al cliente">
+    <meta name="author" content="ConverTech Solutions">
+    <link rel="canonical" href="https://www.convertech.com/contacto">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilos personalizados para la página de contacto */
+        .formulario-contacto {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .formulario-contacto h2 {
+            font-size: 2.25rem;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .formulario-contacto form {
+            margin-top: 1rem;
+        }
+        .formulario-contacto .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .formulario-contacto label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        .formulario-contacto input,
+        .formulario-contacto textarea {
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            transition: border-color 0.2s ease;
+        }
+        .formulario-contacto input:focus,
+        .formulario-contacto textarea:focus {
+            outline: none;
+            border-color: #63b3ed;
+            box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+        }
+        .formulario-contacto textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        .formulario-contacto button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #63b3ed;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        .formulario-contacto button:hover {
+            background-color: #3182ce;
+            transform: translateY(-0.2rem);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .formulario-contacto button:disabled {
+            background-color: #a0aec0;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+            box-shadow: none;
+        }
+        .formulario-contacto .mensaje-exito {
+            background-color: #f0fdf4;
+            color: #15803d;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.375rem;
+            border: 1px solid #16a34a;
+            text-align: center;
+            display: none;
+        }
+        .formulario-contacto .mensaje-error {
+            background-color: #fee2e2;
+            color: #dc2626;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.375rem;
+            border: 1px solid #b91c1c;
+            text-align: center;
+            display: none;
+        }
+        @media (min-width: 768px) {
+            .formulario-contacto button {
+                width: auto;
+            }
+        }
+        /* Estilos para campos inválidos */
+        input.invalid, textarea.invalid {
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+        }
+        input.invalid:focus, textarea.invalid:focus {
+             border-color: #dc2626;
+             box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="flex items-center">
+                <img src="https://www.convertech.com/images/convertech-logo.png" alt="ConverTech Logo" class="h-8 mr-2">
+                <span class="font-semibold text-xl text-gray-800">ConverTech</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="/" class="text-gray-700 hover:text-blue-600 transition duration-300">Inicio</a></li>
+                    <li><a href="/servicios" class="text-gray-700 hover:text-blue-600 transition duration-300">Servicios</a></li>
+                    <li><a href="/nosotros" class="text-gray-700 hover:text-blue-600 transition duration-300">Nosotros</a></li>
+                    <li><a href="/contacto" class="text-blue-600 font-semibold">Contacto</a></li>
+                </ul>
+            </nav>
+            <a href="/contacto" class="cta-button">Contáctanos</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="formulario-contacto">
+            <h2>Contáctanos</h2>
+            <form id="contact-form" method="POST" action="/enviar-correo">
+                <div class="form-group">
+                    <label for="nombre">Nombre <span class="text-red-500">*</span></label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                    <div class="error-message" id="nombre-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido <span class="text-red-500">*</span></label>
+                    <input type="text" id="apellido" name="apellido" placeholder="Tu Apellido" required>
+                    <div class="error-message" id="apellido-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico <span class="text-red-500">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="Tu Correo Electrónico" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Tu Teléfono (Opcional)">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje <span class="text-red-500">*</span></label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Tu Mensaje" required></textarea>
+                    <div class="error-message" id="mensaje-error"></div>
+                </div>
+                <button type="submit" id="enviar-button">Enviar Mensaje</button>
+            </form>
+            <div id="mensaje-exito" class="mensaje-exito" style="display: none;">
+                ¡Mensaje enviado con éxito! Te contactaremos a la brevedad.
+            </div>
+            <div id="mensaje-error" class="mensaje-error" style="display: none;">
+                Ocurrió un error al enviar el mensaje. Por favor, inténtalo nuevamente.
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-200 py-6">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2024 ConverTech. Todos los derechos reservados. <a href="/politica-de-privacidad" class="text-blue-600 hover:underline">Política de Privacidad</a> | <a href="/terminos-de-servicio" class="text-blue-600 hover:underline">Términos de Servicio</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Obtener el formulario y los elementos de los mensajes
+        const contactForm = document.getElementById('contact-form');
+        const mensajeExito = document.getElementById('mensaje-exito');
+        const mensajeError = document.getElementById('mensaje-error');
+        const enviarButton = document.getElementById('enviar-button');
+
+        // Inicializar Firebase (Reemplazar con tu configuración)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Función para mostrar un mensaje
+        function mostrarMensaje(tipo, mensaje) {
+            const mensajeElemento = tipo === 'exito' ? mensajeExito : mensajeError;
+            mensajeElemento.textContent = mensaje;
+            mensajeElemento.style.display = 'block';
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(() => {
+                mensajeElemento.style.display = 'none';
+            }, 5000);
+        }
+
+        //Validaciones
+        function validarNombre() {
+            const nombreInput = document.getElementById('nombre');
+            const nombreError = document.getElementById('nombre-error');
+            if (!nombreInput.value.trim()) {
+                nombreError.textContent = 'Por favor, ingresa tu nombre.';
+                nombreInput.classList.add('invalid');
+                return false;
+            }
+            nombreError.textContent = '';
+            nombreInput.classList.remove('invalid');
+            return true;
+        }
+
+        function validarApellido() {
+            const apellidoInput = document.getElementById('apellido');
+            const apellidoError = document.getElementById('apellido-error');
+            if (!apellidoInput.value.trim()) {
+                apellidoError.textContent = 'Por favor, ingresa tu apellido.';
+                apellidoInput.classList.add('invalid');
+                return false;
+            }
+            apellidoError.textContent = '';
+            apellidoInput.classList.remove('invalid');
+            return true;
+        }
+
+        function validarEmail() {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('email-error');
+            const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+            if (!emailInput.value.trim()) {
+                emailError.textContent = 'Por favor, ingresa tu correo electrónico.';
+                emailInput.classList.add('invalid');
+                return false;
+            } else if (!emailRegex.test(emailInput.value.trim())) {
+                emailError.textContent = 'Por favor, ingresa un correo electrónico válido.';
+                emailInput.classList.add('invalid');
+                return false;
+            }
+            emailError.textContent = '';
+            emailInput.classList.remove('invalid');
+            return true;
+        }
+
+        function validarMensaje() {
+            const mensajeInput = document.getElementById('mensaje');
+            const mensajeError = document.getElementById('mensaje-error');
+            if (!mensajeInput.value.trim()) {
+                mensajeError.textContent = 'Por favor, ingresa tu mensaje.';
+                mensajeInput.classList.add('invalid');
+                return false;
+            }
+            mensajeError.textContent = '';
+            mensajeInput.classList.remove('invalid');
+            return true;
+        }
+
+        // Función para validar el formulario
+        function validarFormulario() {
+            return validarNombre() && validarApellido() && validarEmail() && validarMensaje();
+        }
+
+        // Deshabilitar el botón de envío al cargar la página y habilitarlo cuando el formulario sea válido
+        enviarButton.disabled = true;
+
+        contactForm.addEventListener('input', () => {
+            enviarButton.disabled = !validarFormulario();
+        });
+
+        // Función para manejar el envío del formulario
+        contactForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evitar el envío real del formulario
+
+            if (!validarFormulario()) {
+                return;
+            }
+
+            enviarButton.disabled = true; // Deshabilitar el botón para evitar envíos múltiples
+
+            const nombre = document.getElementById('nombre').value;
+            const apellido = document.getElementById('apellido').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('telefono').value;
+            const mensaje = document.getElementById('mensaje').value;
+
+            // Guardar datos en Firestore
+            db.collection("mensajes").add({
+                nombre: nombre,
+                apellido: apellido,
+                email: email,
+                telefono: telefono,
+                mensaje: mensaje,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() // Agrega un timestamp
+            })
+            .then(() => {
+                mostrarMensaje('exito', '¡Mensaje enviado con éxito! Te contactaremos a la brevedad.');
+                contactForm.reset(); // Limpiar el formulario
+            })
+            .catch((error) => {
+                console.error("Error al guardar el mensaje: ", error);
+                mostrarMensaje('error', 'Ocurrió un error al enviar el mensaje. Por favor, inténtalo nuevamente.');
+            })
+            .finally(() => {
+                enviarButton.disabled = false; // Habilitar el botón nuevamente
+            });
+        });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</body>
+</html>
