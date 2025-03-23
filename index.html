@@ -3,69 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotizaciones Hoy</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Cotizaciones</title>
+    <meta name="description" content="ConverTech ofrece herramientas avanzadas para la conversión de divisas, análisis financiero y gestión de inversiones. Descubre un nuevo nivel de eficiencia en tus operaciones financieras.">
+    <meta name="keywords" content="conversor de divisas, calculadora, finanzas, inversiones, análisis financiero, tipo de cambio, monedas, economía, tecnología financiera, gestión de portafolio">
+    <meta name="author" content="ConverTech Solutions">
+    <link rel="canonical" href="https://www.convertech.com/">
+    <meta property="og:title" content="Cotizaciones Hoy">
+    <meta property="og:description" content="Herramientas avanzadas para la conversión de divisas, análisis financiero y gestión de inversiones.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@CotizacionesHoy">
+    <meta name="twitter:creator" content="@CotizacionesHoy">
+    <meta name="twitter:title" content="Cotizaciones Hoy">
+    <meta name="twitter:description" content="Herramientas avanzadas para la conversión de divisas, análisis financiero y gestión de inversiones.">
+    <meta name="twitter:image" content="https://www.cotizacioneshoy.com/images/convertech-logo.png">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilos personalizados para la calculadora (opcional) */
+        .calculator {
+            width: 300px;
+            border: 2px solid #4a5568;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background-color: #f7fafc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .display {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            text-align: right;
+            background-color: #edf2f7;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+            overflow: hidden;
+            word-wrap: break-word;
+            min-height: 2.75rem;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        .button {
+            padding: 0.75rem 0;
+            font-size: 1.25rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            background-color: #ffffff;
+        }
+        .button:hover {
+            background-color: #f0f0f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+        }
+        .number, .decimal {
+            background-color: #ffffff;
+        }
+        .operator {
+            background-color: #f5f5f5;
+        }
+        .equals {
+            background-color: #4a5568;
+            color: #ffffff;
+        }
+        .equals:hover {
+            background-color: #718096;
+        }
+        .clear, .delete {
+            background-color: #f5f5f5;
+            color: #000000;
+        }
+        .clear:hover, .delete:hover{
+            background-color: #e2e2e2;
+        }
+        .span-2 {
+            grid-column: span 2;
+        }
+         /* Estilos para el contenedor de frases */
+        .frase-container {
+            background-color: #f7fafc;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .frase-container p {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        .feature-box {
+            background-color: #fff;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-box:hover {
+            transform: translateY(-0.5rem);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+        .feature-box h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        .feature-box p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.7;
+        }
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.6rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: #63b3ed;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button:hover {
+            background-color: #3182ce;
+            transform: translateY(-0.2rem);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        .gradient-bg {
+            background: linear-gradient(to right, #a7f3d0, #facc15);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4a5568, #1a202c);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    </style>
 </head>
-<body>
-
-    <header class="site-header">
-        <div class="container">
-            <h1 class="site-title">Cotizaciones Hoy</h1>
-            <nav class="site-nav">
-                <a href="cotizaciones.html" class="nav-link">Cotizaciones</a>
-                <a href="divisas.html" class="nav-link">Divisas</a>
-                <a href="conversor.html" class="nav-link">Conversor</a>
-                <a href="contacto.html" class="nav-link">Contacto</a>
+<body class="bg-gray-100 font-sans antialiased">
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="flex items-center">
+                <img src="https://www.convertech.com/images/convertech-logo.png" alt="ConverTech Logo" class="h-8 mr-2">
+                <span class="font-semibold text-xl text-gray-800 gradient-text">ConverTech</span>
+            </a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6">
+                    <li><a href="#inicio" class="text-gray-700 hover:text-blue-600 transition duration-300">Inicio</a></li>
+                    <li><a href="#servicios" class="text-gray-700 hover:text-blue-600 transition duration-300">Servicios</a></li>
+                    <li><a href="#nosotros" class="text-gray-700 hover:text-blue-600 transition duration-300">Nosotros</a></li>
+                    <li><a href="#contacto" class="text-gray-700 hover:text-blue-600 transition duration-300">Contacto</a></li>
+                </ul>
             </nav>
+            <a href="#contacto" class="cta-button">Contáctanos</a>
         </div>
     </header>
 
-    <div class="main-container">
+    <main class="container mx-auto px-4 py-10">
+        <section id="inicio" class="text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4 gradient-text">Bienvenido a Cotizaciones Hoy</h1>
+            <p class="text-xl text-gray-700 mb-8">Donde le ofrecemos soluciones financieras inteligentes para un mundo en constante cambio.</p>
+            <a href="#servicios" class="cta-button">Descubre nuestros servicios</a>
+        </section>
 
-        <aside class="ad-sidebar ad-left">
-            <div class="ad-unit">
-                Anuncio Izquierdo
+        <section id="frases" class="mb-16">
+            <div class="frase-container">
+                <p id="frase-inspiradora"></p>
             </div>
-        </aside>
+        </section>
 
-        <main class="main-content">
-            <section id="cotizaciones" class="currency-section">
-                <h2>Cotizaciones en Tiempo Real</h2>
-                <input type="text" id="currency-search" class="search-input" placeholder="Buscar divisa...">
-                <div id="currency-list" class="currency-list">
-                    </div>
-            </section>
-
-            <section id="conversor" class="converter-section">
-                <h2>Conversor de Divisas</h2>
-                <div class="converter-inputs">
-                    <input type="number" id="amount-input" class="amount-input" placeholder="Cantidad">
-                    <select id="from-currency" class="currency-select"></select>
-                    <select id="to-currency" class="currency-select"></select>
-                    <button id="convert-button" class="convert-button">Convertir</button>
+        <section id="servicios" class="mb-20">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-box">
+                    <h3 class="gradient-text">Conversión de Divisas Avanzada</h3>
+                    <p class="text-gray-600">
+                        Obtén tipos de cambio precisos y actualizados al instante. Nuestra plataforma te permite convertir entre una amplia variedad de monedas con facilidad y eficiencia.
+                    </p>
                 </div>
-                <div id="conversion-result" class="conversion-result"></div>
-            </section>
-        </main>
-
-        <aside class="ad-sidebar ad-right">
-            <div class="ad-unit">
-                Anuncio Derecho
+                <div class="feature-box">
+                    <h3 class="gradient-text">Análisis Financiero Personalizado</h3>
+                    <p class="text-gray-600">
+                        Accede a herramientas de análisis financiero de última generación. Evalúa el rendimiento de tus inversiones, gestiona riesgos y toma decisiones informadas.
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <h3 class="gradient-text">Gestión de Portafolio Inteligente</h3>
+                    <p class="text-gray-600">
+                       Optimiza tu portafolio de inversiones con nuestra tecnología. Realiza un seguimiento de tus activos, diversifica tu cartera y maximiza tus retornos.
+                    </p>
+                </div>
+                 <div class="feature-box">
+                    <h3 class="gradient-text">Calculadora Financiera</h3>
+                    <p class="text-gray-600">
+                       Realiza cálculos rápidos y precisos directamente en nuestra página. Nuestra calculadora es fácil de usar y perfecta para operaciones diarias.
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <h3 class="gradient-text">Alertas y Notificaciones</h3>
+                    <p class="text-gray-600">
+                       Mantente informado sobre los cambios importantes en el mercado de divisas y tus inversiones. Recibe alertas personalizadas por correo electrónico o notificaciones móviles.
+                    </p>
+                </div>
+                <div class="feature-box">
+                    <h3 class="gradient-text">Integración API</h3>
+                    <p class="text-gray-600">
+                       Integra nuestras soluciones financieras en tus propios sistemas con nuestra API. Accede a datos de mercado, realiza conversiones y automatiza tus procesos.
+                    </p>
+                </div>
             </div>
-        </aside>
+        </section>
 
-    </div>
+        <section id="nosotros" class="mb-20">
+            <h2 class="section-title">Acerca de Nosotros</h2>
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    En ConverTech, nos apasiona la tecnología y las finanzas. Creemos que la innovación puede transformar la forma en que las personas gestionan su dinero y toman decisiones financieras.
+                    Nuestro equipo está formado por expertos en desarrollo de software, análisis financiero y gestión de inversiones, todos comprometidos con la creación de herramientas
+                    poderosas y fáciles de usar. Nos esforzamos por ofrecer soluciones que sean accesibles, transparentes y confiables, ayudando a nuestros usuarios a alcanzar sus metas financieras
+                    con confianza.
+                </p>
+            </div>
+        </section>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2024 Cotizaciones de Divisas. Todos los derechos reservados.</p>
-            <p>Contacto: info@cotizaciones.com</p>
+        <section id="contacto" class="mb-16 text-center">
+            <h2 class="section-title">Contáctanos</h2>
+            <p class="text-lg text-gray-700 mb-8">¿Tienes alguna pregunta? ¿Estás listo para dar el siguiente paso? ¡Contáctanos hoy mismo!</p>
+            <a href="mailto:info@convertech.com" class="cta-button">Enviar un correo electrónico</a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-200 py-6">
+        <div class="container mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2024 ConverTech. Todos los derechos reservados. <a href="/politica-de-privacidad" class="text-blue-600 hover:underline">Política de Privacidad</a> | <a href="/terminos-de-servicio" class="text-blue-600 hover:underline">Términos de Servicio</a></p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Lógica de la calculadora
+        let display = document.getElementById('display');
+        let currentInput = '0';
+        let previousInput = null;
+        let operator = null;
+
+        function updateDisplay() {
+            display.textContent = currentInput;
+        }
+
+        function appendNumber(number) {
+            if (currentInput === '0' || currentInput === 'Infinity' || currentInput === '-Infinity' || isNaN(parseFloat(currentInput))) {
+                currentInput = number;
+            } else {
+                currentInput += number;
+            }
+            updateDisplay();
+        }
+
+        function appendDecimal() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+                updateDisplay();
+            }
+        }
+
+        function appendOperator(op) {
+            if (currentInput !== '0' && currentInput !== '-' && !isNaN(parseFloat(currentInput)) && previousInput === null) {
+                previousInput = currentInput;
+                operator = op;
+                currentInput = '0';
+            }
+            else if (previousInput !== null){
+                 calculate();
+                 operator = op;
+            }
+            else if (currentInput === '0' && op === '-') {
+                currentInput = '-';
+            }
+            else if (currentInput === '-' && op !== '-')
+            {
+                currentInput = '0';
+                operator = op;
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+           if (previousInput !== null && currentInput !== '0' && currentInput !== '-') {
+                const num1 = parseFloat(previousInput);
+                const num2 = parseFloat(currentInput);
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = num1 + num2;
+                        break;
+                    case '-':
+                        result = num1 - num2;
+                        break;
+                    case '*':
+                        result = num1 * num2;
+                        break;
+                    case '/':
+                        if (num2 === 0) {
+                            result = 'Infinity';
+                        } else {
+                            result = num1 / num2;
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                currentInput = String(result);
+                previousInput = null;
+                operator = null;
+                updateDisplay();
+            }
+            else if (previousInput !== null && currentInput ==='0' && operator === '/')
+            {
+                 currentInput = 'Infinity';
+                 previousInput = null;
+                 operator = null;
+                 updateDisplay()
+            }
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            previousInput = null;
+            operator = null;
+            updateDisplay();
+        }
+
+        function deleteDigit() {
+            currentInput = currentInput.slice(0, -1);
+            if (currentInput === '') {
+                currentInput = '0';
+            }
+            updateDisplay();
+        }
+
+        // Array de frases inspiradoras
+        const frases = [
+            "El éxito es la suma de pequeños esfuerzos repetidos día tras día. - Robert Collier",
+            "No importa lo lento que vayas, siempre y cuando no te detengas. - Confucio",
+            "El único límite es el que te pones a ti mismo. - Desconocido",
+            "Cree en ti y todo será posible. - Desconocido",
+            "La mejor manera de predecir el futuro es crearlo. - Peter Drucker",
+            "El futuro pertenece a quienes creen en la belleza de sus sueños. - Eleanor Roosevelt",
+            "No te rindas, cada intento fallido es un paso más hacia el éxito. - Thomas Edison",
+            "La vida es 10% lo que nos sucede y 90% cómo reaccionamos a ello. - Charles R. Swindoll",
+            "Sueña en grande y atrévete a fallar. - Norman Vaughan",
+            "La única manera de hacer un gran trabajo es amar lo que haces. - Steve Jobs"
+        ];
+
+        // Función para seleccionar una frase aleatoria
+        function mostrarFraseAleatoria() {
+            const fraseElement = document.getElementById('frase-inspiradora');
+            const indiceAleatorio = Math.floor(Math.random() * frases.length);
+            fraseElement.textContent = frases[indiceAleatorio];
+        }
+
+        // Llama a la función al cargar la página
+        window.onload = mostrarFraseAleatoria;
+
+    </script>
 </body>
 </html>
