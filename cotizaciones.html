@@ -52,10 +52,10 @@
         </header>
 
         <main class="main-content" role="main">
-            <section class="currency-list-section" aria-labelledby="currency-list-title">
+            <section class="currency-search-section" aria-labelledby="currency-search-title">
                 <div class="section-header">
-                    <h1 id="currency-list-title" class="section-title">Cotizaciones de Divisas</h1>
-                    <p class="section-description">Consulta las cotizaciones actualizadas de las principales divisas.</p>
+                    <h1 id="currency-search-title" class="section-title">Cotizaciones de Divisas</h1>
+                    <p class="section-description">Encuentra la información que necesitas sobre divisas.</p>
                 </div>
 
                 <div class="search-container">
@@ -64,43 +64,11 @@
                     <div id="mensaje-error" class="error-message" role="alert" aria-live="assertive" style="display: none;"></div>
                 </div>
 
-                <div id="resultados-busqueda" class="resultados-busqueda" aria-live="polite">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Precio (USD)</th>
-                                <th>Detalles</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-resultados-body">
-                            </tbody>
-                    </table>
-                </div>
+                <div id="resultado-divisa" class="resultado-divisa" aria-live="polite">
+                    </div>
 
-                <div id="all-currencies" class="all-currencies">
-                    <table id="tabla-cotizaciones" class="currency-table">
-                        <thead>
-                            <tr>
-                                <th class="codigo-columna">Código</th>
-                                <th class="nombre-columna ordenable" data-orden="asc">Nombre</th>
-                                <th class="precio-columna ordenable" data-orden="asc">Precio (USD)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="3">Cargando datos...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div id="indicador-carga" class="loading-indicator" aria-busy="true" style="display: none;">Cargando...</div>
-                </div>
+                <div id="indicador-carga" class="loading-indicator" aria-busy="true" style="display: none;">Cargando...</div>
 
-                <div class="pagination-container" aria-label="Paginación">
-                    <button id="pagina-anterior" class="pagination-button">Anterior</button>
-                    <span id="pagina-actual" class="pagination-info">1</span>
-                    <button id="pagina-siguiente" class="pagination-button">Siguiente</button>
-                </div>
             </section>
         </main>
 
@@ -111,6 +79,6 @@
             </div>
         </footer>
 
-        <script src="cotizaciones.js"></script>
+        <script src="javascript/cotizaciones.js"></script>
     </body>
     </html>
