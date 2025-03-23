@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Divisas Profesional</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Logo Cotizaciones de Divisas">
+            </a>
+            <nav class="site-nav">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="divisas.html" class="nav-link">Divisas</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="converter-section">
+            <div class="converter-header">
+                <h2>Conversor de Divisas Avanzado</h2>
+                <p>Realiza conversiones de divisas en tiempo real con datos actualizados.</p>
+            </div>
+
+            <div class="converter-inputs">
+                <div class="input-group">
+                    <label for="amount-input">Cantidad:</label>
+                    <input type="number" id="amount-input" class="amount-input" placeholder="Ingrese la cantidad">
+                </div>
+
+                <div class="input-group">
+                    <label for="from-currency">De:</label>
+                    <select id="from-currency" class="currency-select"></select>
+                </div>
+
+                <div class="input-group">
+                    <label for="to-currency">A:</label>
+                    <select id="to-currency" class="currency-select"></select>
+                </div>
+
+                <button id="convert-button" class="convert-button">Realizar Conversión</button>
+            </div>
+
+            <div class="conversion-results">
+                <div id="conversion-result" class="conversion-result"></div>
+            </div>
+
+            <div class="converter-info">
+                <h3>Información Adicional</h3>
+                <p>Las tasas de cambio se actualizan cada hora. Los datos son proporcionados por una API confiable.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 Cotizaciones de Divisas. Todos los derechos reservados.</p>
+            <p>Contacto: info@cotizaciones.com</p>
+        </div>
+    </footer>
+
+    <script src="js/conversor.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+/* style.css */
+
+    /* Estilos generales */
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9; /* Fondo gris claro suave */
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Cabecera */
+    .site-header {
+        background-color: #00796b;
+        color: #fff;
+        padding: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    }
+
+    .site-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-title, .logo img {
+        margin: 0;
+    }
+
+    .site-nav {
+        display: flex;
+    }
+
+    .nav-link {
+        color: #fff;
+        text-decoration: none;
+        margin-left: 20px;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Contenido principal */
+    .main-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    }
+
+    /* Anuncios laterales */
+    .ad-sidebar {
+        width: 250px;
+        background-color: #f0f0f0;
+        padding: 25px;
+        border-radius: 8px;
+    }
+
+    .ad-unit {
+        border: 1px solid #ddd;
+        padding: 20px;
+        text-align: center;
+        border-radius: 6px;
+    }
+
+    /* Secciones de cotizaciones y conversor (index.html) */
+    .currency-section, .converter-section {
+        margin-bottom: 30px;
+        border-radius: 8px;
+        padding: 25px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 25px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    .currency-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .currency-card {
+        background-color: #e8f5e9;
+        border: 1px solid #c8e6c9;
+        padding: 25px;
+        margin: 15px;
+        width: 220px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .currency-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .converter-inputs {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .amount-input, .currency-select, .convert-button {
+        padding: 12px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+    }
+
+    .convert-button {
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .convert-button:hover {
+        background-color: #43a047;
+    }
+
+    .conversion-result {
+        font-size: 1.3em;
+        font-weight: 500;
+        text-align: center;
+        padding: 20px;
+        background-color: #e8f5e9;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+
+    /* Lista de divisas (divisas.html) */
+    .currency-list-section {
+        margin-bottom: 30px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .search-label {
+        margin-right: 12px;
+    }
+
+    .currency-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .currency-table th, .currency-table td {
+        border: 1px solid #ddd;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .currency-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+    }
+
+    .loading-indicator {
+        text-align: center;
+        margin-top: 25px;
+        font-style: italic;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 25px;
+    }
+
+    .pagination-button {
+        padding: 12px 18px;
+        margin: 0 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .pagination-button:hover {
+        background-color: #eee;
+    }
+
+    .pagination-info {
+        margin: 0 12px;
+        font-weight: 500;
+    }
+
+    /* Conversor avanzado (conversor.html) */
+    .converter-header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .converter-inputs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .input-group label {
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+
+    .converter-info {
+        background-color: #f0f0f0;
+        padding: 25px;
+        border-radius: 10px;
+        color: #555;
+        margin-top: 30px;
+    }
+
+    /* Pie de página */
+    .site-footer {
+        background-color: #e0f7fa;
+        padding: 25px 0;
+        text-align: center;
+        color: #006064;
+        margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+        .main-container {
+            flex-direction: column;
+        }
+
+        .ad-sidebar {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .converter-inputs {
+            flex-direction: column;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizaciones Hoy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title">Cotizaciones Hoy</h1>
+            <nav class="site-nav">
+                <a href="cotizaciones.html" class="nav-link">Cotizaciones</a>
+                <a href="divisas.html" class="nav-link">Divisas</a>
+                <a href="conversor.html" class="nav-link">Conversor</a>
+                <a href="contacto.html" class="nav-link">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+
+        <aside class="ad-sidebar ad-left">
+            <div class="ad-unit">
+                Anuncio Izquierdo
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section id="cotizaciones" class="currency-section">
+                <h2>Cotizaciones en Tiempo Real</h2>
+                <input type="text" id="currency-search" class="search-input" placeholder="Buscar divisa...">
+                <div id="currency-list" class="currency-list">
+                    </div>
+            </section>
+
+            <section id="conversor" class="converter-section">
+                <h2>Conversor de Divisas</h2>
+                <div class="converter-inputs">
+                    <input type="number" id="amount-input" class="amount-input" placeholder="Cantidad">
+                    <select id="from-currency" class="currency-select"></select>
+                    <select id="to-currency" class="currency-select"></select>
+                    <button id="convert-button" class="convert-button">Convertir</button>
+                </div>
+                <div id="conversion-result" class="conversion-result"></div>
+            </section>
+        </main>
+
+        <aside class="ad-sidebar ad-right">
+            <div class="ad-unit">
+                Anuncio Derecho
+            </div>
+        </aside>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2024 Cotizaciones de Divisas. Todos los derechos reservados.</p>
+            <p>Contacto: info@cotizaciones.com</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
