@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto</title>
+    <meta name="description" content="Ponte en contacto con nosotros.">
+    <meta name="keywords" content="contacto, formulario, ayuda, soporte">
+    <meta name="author" content="Tu Nombre">
+    <link rel="canonical" href="https://tu-sitio.com/contacto.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilos personalizados para la página de contacto */
+        body {
+            background-color: #f7fafc; /* Color de fondo muy claro */
+        }
+        .contenedor {
+            max-width: 1200px; /* Ancho máximo del contenido */
+            margin: 0 auto; /* Centrar el contenido */
+            padding: 2rem; /* Espaciado interior */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el título y el botón */
+            align-items: center; /* Alinear verticalmente */
+            margin-bottom: 2rem; /* Espacio debajo del header */
+        }
+        .titulo-principal {
+            font-size: 3rem; /* Tamaño de fuente grande */
+            font-weight: 700; /* Negrita */
+            color: #1a202c; /* Color de texto muy oscuro */
+        }
+        .subtitulo-principal {
+            font-size: 1.25rem; /* Tamaño de fuente mediano */
+            color: #4a5568; /* Color de texto un poco más claro */
+            margin-bottom: 4rem; /* Espacio debajo del subtítulo */
+            text-align: center;
+        }
+        .formulario-contacto {
+            background-color: #ffffff; /* Fondo blanco para el formulario */
+            border-radius: 0.75rem; /* Bordes redondeados */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+            padding: 2rem; /* Espaciado interior en el formulario */
+            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+            margin-bottom: 2rem; /* Espacio debajo del formulario */
+        }
+        .formulario-contacto:hover {
+            transform: translateY(-0.25rem); /* Ligeramente hacia arriba al pasar el mouse */
+            box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15), 0 3px 5px -1px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el mouse */
+        }
+        .formulario-contacto label {
+            display: block;
+            font-size: 1rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        .formulario-contacto input,
+        .formulario-contacto textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .formulario-contacto button {
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .formulario-contacto button:hover {
+            background-color: #2563eb;
+        }
+        .menu {
+            position: relative;
+            display: inline-block;
+        }
+        .menu-boton {
+            background-color: #3b82f6; /* Fondo azul */
+            color: white; /* Texto blanco */
+            padding: 0.75rem 1.5rem; /* Espaciado interior */
+            font-size: 1rem; /* Tamaño de fuente */
+            font-weight: 600; /* Negrita */
+            border: none; /* Sin borde */
+            border-radius: 0.375rem; /* Bordes redondeados */
+            cursor: pointer; /* Cursor de mano */
+            transition: background-color 0.2s ease; /* Transición suave */
+        }
+        .menu-boton:hover {
+            background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
+        }
+        .menu-contenido {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            background-color: white; /* Fondo blanco */
+            min-width: 12rem; /* Ancho mínimo */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+            border-radius: 0.375rem; /* Bordes redondeados */
+            z-index: 1; /* Asegurar que esté por encima de otros elementos */
+            top: 100%; /* Desplegar el contenido del menú por debajo del botón */
+            right: 0; /* Alinear el contenido del menú a la derecha */
+        }
+        .menu-contenido a {
+            color: #1a202c; /* Color de texto oscuro */
+            padding: 1rem; /* Espaciado interior */
+            text-decoration: none; /* Sin subrayado */
+            display: block; /* Mostrar como bloque */
+            font-weight: 600; /* Negrita */
+        }
+        .menu-contenido a:hover {
+            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+        }
+        .menu:hover .menu-contenido {
+            display: block; /* Mostrar menú al pasar el mouse */
+        }
+        .menu:hover .menu-boton {
+            background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="contenedor">
+        <div class="header">
+            <h1 class="titulo-principal">Contacto</h1>
+            <!-- Menu de navegación -->
+            <div class="menu">
+                <button class="menu-boton">Menú</button>
+                <div class="menu-contenido">
+                    <a href="Buscador.html">Buscador</a>
+                    <a href="noticias.html">Noticias</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="Iniciarsesion.html">Iniciar Sesion</a>
+                </div>
+            </div>
+        </div>
+        <div class="formulario-contacto">
+            <form>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="Tu correo electrónico">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" placeholder="Tu mensaje"></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

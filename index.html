@@ -20,12 +20,16 @@
             margin: 0 auto; /* Centrar el contenido */
             padding: 2rem; /* Espaciado interior */
         }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el título y el botón */
+            align-items: center; /* Alinear verticalmente */
+            margin-bottom: 2rem; /* Espacio debajo del header */
+        }
         .titulo-principal {
             font-size: 3rem; /* Tamaño de fuente grande */
             font-weight: 700; /* Negrita */
             color: #1a202c; /* Color de texto muy oscuro */
-            margin-bottom: 2rem; /* Espacio debajo del título */
-            text-align: center; /* Centrar el título */
         }
         .subtitulo-principal {
             font-size: 1.25rem; /* Tamaño de fuente mediano */
@@ -107,8 +111,6 @@
         .menu {
             position: relative;
             display: inline-block;
-            float: right; /* Mover el menú a la derecha */
-            margin-right: 20px; /* Ajustar el margen derecho para mover el botón más a la derecha */
         }
         .menu-boton {
             background-color: #3b82f6; /* Fondo azul */
@@ -155,17 +157,19 @@
 </head>
 <body class="bg-gray-100 font-sans antialiased">
     <div class="contenedor">
-        <!-- Menu de navegación -->
-        <div class="menu">
-            <button class="menu-boton">Menú</button>
-            <div class="menu-contenido">
-                <a href="#">Inicio</a>
-                <a href="#">Cotizaciones</a>
-                <a href="#">Noticias</a>
-                <a href="#">Contacto</a>
+        <div class="header">
+            <h1 class="titulo-principal">Cotización de Divisas en Tiempo Real</h1>
+            <!-- Menu de navegación -->
+            <div class="menu">
+                <button class="menu-boton">Menú</button>
+                <div class="menu-contenido">
+                    <a href="Buscador.html">Buscador</a>
+                    <a href="noticias.html">Noticias</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="Iniciarsesion.html">Iniciar Sesion</a>
+                </div>
             </div>
         </div>
-        <h1 class="titulo-principal">Cotización de Divisas en Tiempo Real</h1>
         <p class="subtitulo-principal">Información actualizada de las principales monedas del mundo, incluyendo tipo de cambio y tendencia del mercado.</p>
         <div id="mensaje-error" class="mensaje-error">
             Error al cargar las divisas. Por favor, inténtelo de nuevo más tarde.

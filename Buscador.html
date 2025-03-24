@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador</title>
+    <meta name="description" content="Busca información sobre divisas.">
+    <meta name="keywords" content="buscador, divisas, información, búsqueda">
+    <meta name="author" content="Tu Nombre">
+    <link rel="canonical" href="https://tu-sitio.com/buscador.html">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <style>
+        /* Estilos personalizados para la página de buscador */
+        body {
+            background-color: #f7fafc; /* Color de fondo muy claro */
+        }
+        .contenedor {
+            max-width: 1200px; /* Ancho máximo del contenido */
+            margin: 0 auto; /* Centrar el contenido */
+            padding: 2rem; /* Espaciado interior */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Espacio entre el título y el botón */
+            align-items: center; /* Alinear verticalmente */
+            margin-bottom: 2rem; /* Espacio debajo del header */
+        }
+        .titulo-principal {
+            font-size: 3rem; /* Tamaño de fuente grande */
+            font-weight: 700; /* Negrita */
+            color: #1a202c; /* Color de texto muy oscuro */
+        }
+        .subtitulo-principal {
+            font-size: 1.25rem; /* Tamaño de fuente mediano */
+            color: #4a5568; /* Color de texto un poco más claro */
+            margin-bottom: 4rem; /* Espacio debajo del subtítulo */
+            text-align: center;
+        }
+        .buscador {
+            background-color: #ffffff; /* Fondo blanco para el buscador */
+            border-radius: 0.75rem; /* Bordes redondeados */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+            padding: 2rem; /* Espaciado interior en el buscador */
+            margin-bottom: 2rem; /* Espacio debajo del buscador */
+        }
+        .buscador input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        .lista-divisas {
+            max-height: 300px; /* Altura máxima para la lista de divisas */
+            overflow-y: auto; /* Habilitar el scroll vertical */
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        }
+        .lista-divisas div {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .lista-divisas div:hover {
+            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+        }
+        .menu {
+            position: relative;
+            display: inline-block;
+        }
+        .menu-boton {
+            background-color: #3b82f6; /* Fondo azul */
+            color: white; /* Texto blanco */
+            padding: 0.75rem 1.5rem; /* Espaciado interior */
+            font-size: 1rem; /* Tamaño de fuente */
+            font-weight: 600; /* Negrita */
+            border: none; /* Sin borde */
+            border-radius: 0.375rem; /* Bordes redondeados */
+            cursor: pointer; /* Cursor de mano */
+            transition: background-color 0.2s ease; /* Transición suave */
+        }
+        .menu-boton:hover {
+            background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
+        }
+        .menu-contenido {
+            display: none; /* Oculto por defecto */
+            position: absolute;
+            background-color: white; /* Fondo blanco */
+            min-width: 12rem; /* Ancho mínimo */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+            border-radius: 0.375rem; /* Bordes redondeados */
+            z-index: 1; /* Asegurar que esté por encima de otros elementos */
+            top: 100%; /* Desplegar el contenido del menú por debajo del botón */
+            right: 0; /* Alinear el contenido del menú a la derecha */
+        }
+        .menu-contenido a {
+            color: #1a202c; /* Color de texto oscuro */
+            padding: 1rem; /* Espaciado interior */
+            text-decoration: none; /* Sin subrayado */
+            display: block; /* Mostrar como bloque */
+            font-weight: 600; /* Negrita */
+        }
+        .menu-contenido a:hover {
+            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+        }
+        .menu:hover .menu-contenido {
+            display: block; /* Mostrar menú al pasar el mouse */
+        }
+        .menu:hover .menu-boton {
+            background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="contenedor">
+        <div class="header">
+            <h1 class="titulo-principal">Buscador de Divisas</h1>
+            <!-- Menu de navegación -->
+            <div class="menu">
+                <button class="menu-boton">Menú</button>
+                <div class="menu-contenido">
+                    <a href="Buscador.html">Buscador</a>
+                    <a href="noticias.html">Noticias</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="Iniciarsesion.html">Iniciar Sesion</a>
+                </div>
+            </div>
+        </div>
+        <div class="buscador">
+            <input type="text" id="buscador-input" placeholder="Buscar divisa...">
+            <div id="lista-divisas" class="lista-divisas"></div>
+        </div>
+    </div>
+    <script>
+        // Lista de divisas ordenada alfabéticamente
+        const divisas = [
+            'AUD - Dólar Australiano',
+            'BRL - Real Brasileño',
+            'CAD - Dólar Canadiense',
+            'CHF - Franco Suizo',
+            'CNY - Yuan Chino',
+            'EUR - Euro',
+            'GBP - Libra Esterlina',
+            'JPY - Yen Japonés',
+            'MXN - Peso Mexicano',
+            'RUB - Rublo Ruso',
+            'USD - Dólar Estadounidense'
+            // Agrega más divisas aquí
+        ].sort();
+
+        const buscadorInput = document.getElementById('buscador-input');
+        const listaDivisas = document.getElementById('lista-divisas');
+
+        // Función para mostrar la lista de divisas
+        function mostrarListaDivisas() {
+            listaDivisas.innerHTML = '';
+            const valorBuscador = buscadorInput.value.toLowerCase();
+            divisas.forEach(divisa => {
+                if (divisa.toLowerCase().includes(valorBuscador)) {
+                    const div = document.createElement('div');
+                    div.textContent = divisa;
+                    div.addEventListener('click', () => {
+                        alert(`Seleccionaste: ${divisa}`);
+                    });
+                    listaDivisas.appendChild(div);
+                }
+            });
+        }
+
+        buscadorInput.addEventListener('input', mostrarListaDivisas);
+
+        // Mostrar todas las divisas al cargar la página
+        mostrarListaDivisas();
+    </script>
+</body>
+</html>
