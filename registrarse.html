@@ -149,20 +149,21 @@
     </div>
 
     <!-- Agrega el SDK de Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 
     <!-- Configura tu proyecto de Firebase -->
     <script>
         // Configuración de Firebase
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
+            authDomain: "cotizaciones-hoy.firebaseapp.com",
+            projectId: "cotizaciones-hoy",
+            storageBucket: "cotizaciones-hoy.firebasestorage.app",
+            messagingSenderId: "104412367418",
+            appId: "1:104412367418:web:0962a9c13738e088610303",
+            measurementId: "G-R5KRC3LZ70"
         };
 
         // Inicializa Firebase
@@ -172,28 +173,27 @@
 
         // Proceso de registro
         const registroForm = document.getElementById('registro-form');
-        registroForm.addEventListener('submit', (e) => {
+        registroForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    return db.collection('usuarios').doc(user.uid).set({
-                        nombre: nombre,
-                        email: email,
-                        uid: user.uid
-                    });
-                })
-                .then(() => {
-                    alert('Usuario registrado con éxito');
-                })
-                .catch((error) => {
-                    console.error('Error al registrar usuario:', error);
-                    alert('Error al registrar usuario');
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+
+                await db.collection('usuarios').doc(user.uid).set({
+                    nombre: nombre,
+                    email: email,
+                    uid: user.uid
                 });
+
+                alert('Usuario registrado con éxito');
+            } catch (error) {
+                console.error('Error al registrar usuario:', error);
+                alert('Error al registrar usuario');
+            }
         });
     </script>
 </body>
