@@ -69,11 +69,17 @@
         .form-footer a:hover {
             text-decoration: underline;
         }
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Registro</h2>
+        <div id="error-message" class="error"></div>
         <form id="registration-form">
             <div class="form-group">
                 <label for="name">Nombre</label>
@@ -97,5 +103,29 @@
             <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión</a></p>
         </div>
     </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+        
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
+            authDomain: "cotizaciones-hoy.firebaseapp.com",
+            projectId: "cotizaciones-hoy",
+            storageBucket: "cotizaciones-hoy.firebasestorage.app",
+            messagingSenderId: "104412367418",
+            appId: "1:104412367418:web:0962a9c13738e088610303",
+            measurementId: "G-R5KRC3LZ70"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+    </script>
+    <!-- Include your JavaScript file -->
+    <script type="module" src="JavaScript/registrarse.js"></script>
 </body>
 </html>
