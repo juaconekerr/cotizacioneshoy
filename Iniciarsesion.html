@@ -165,5 +165,28 @@
             <a href="registrarse.html" class="registro-link">¿No tienes una cuenta? Regístrate</a>
         </div>
     </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
+          authDomain: "cotizaciones-hoy.firebaseapp.com",
+          projectId: "cotizaciones-hoy",
+          storageBucket: "cotizaciones-hoy.firebasestorage.app",
+          messagingSenderId: "104412367418",
+          appId: "1:104412367418:web:0962a9c13738e088610303",
+          measurementId: "G-R5KRC3LZ70"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
 </body>
 </html>

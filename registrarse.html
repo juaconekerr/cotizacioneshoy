@@ -3,98 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario | Cotizaciones Hoy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Registro de usuario</title>
+    <meta name="description" content="Regístrate para crear una cuenta en nuestro sitio.">
+    <meta name="keywords" content="registro, cuenta, usuario, crear cuenta">
+    <meta name="author" content="Tu Nombre o Nombre de la Empresa">
+    <link rel="canonical" href="URL de tu página de registro">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta property="og:title" content="Registro de usuario">
+    <meta property="og:description" content="Regístrate para crear una cuenta en nuestro sitio.">
+    <meta property="og:image" content="URL de una imagen representativa">
+    <meta property="og:url" content="URL de tu página de registro">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
-<body class="bg-gray-100 font-sans antialiased">
-    <div class="contenedor">
-        <div class="header">
-            <h1 class="titulo-principal">Cotizaciones Hoy</h1>
-            <!-- Menu de navegación -->
-            <div class="menu">
-                <button class="menu-boton">Menú</button>
-                <div class="menu-contenido">
-                    <a href="Buscador.html">Buscador</a>
-                    <a href="noticias.html">Noticias</a>
-                    <a href="contacto.html">Contacto</a>
-                    <a href="Iniciarsesion.html">Iniciar Sesion</a>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="login.html">Iniciar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="registro-container">
+            <h1 class="animate__animated animate__fadeInDown">Registro de usuario</h1>
+            <form id="registro-form" action="procesar_registro.php" method="POST">
+                <div class="form-group animate__animated animate__fadeInUp">
+                    <label for="nombre_completo">Nombre completo:</label>
+                    <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ingresa tu nombre completo" required>
                 </div>
-            </div>
-        </div>
-        
-        <section class="registration-section">
-            <div class="container">
-                <div class="form-container">
-                    <h2>Crear Cuenta</h2>
-                    <p>Regístrate para acceder a nuestros servicios</p>
-                    <div id="error-message" class="mensaje-error"></div>
-                    <form id="registration-form">
-                        <div class="form-group">
-                            <label for="name">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm-password">Confirmar Contraseña</label>
-                            <input type="password" id="confirm-password" name="confirm-password" required>
-                        </div>
-                        <button type="submit" class="btn-submit">Registrarse</button>
-                    </form>
-                    <div class="form-footer">
-                        <p>¿Ya tienes una cuenta? <a href="Iniciarsesion.html">Inicia sesión</a></p>
-                    </div>
+                <div class="form-group animate__animated animate__fadeInUp">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico" required>
                 </div>
-            </div>
+                <div class="form-group animate__animated animate__fadeInUp">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <div class="form-group animate__animated animate__fadeInUp">
+                    <label for="confirm_password">Confirmar contraseña:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirma tu contraseña" required>
+                </div>
+                <div class="form-group animate__animated animate__fadeInUp">
+                    <button type="submit">Registrarse</button>
+                </div>
+                <div id="mensaje-error" class="error-message"></div>
+                <div id="mensaje-exito" class="success-message animate__animated animate__fadeInUp"></div>
+            </form>
         </section>
-    </div>
+    </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Sobre Nosotros</h3>
-                    <p>Cotizaciones Hoy es una plataforma que ofrece información actualizada sobre las principales divisas del mundo.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Enlaces Útiles</h3>
-                    <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Servicios</a></li>
-                        <li><a href="#">Precios</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <p>Email: soporte@cotizacioneshoy.com</p>
-                    <p>Teléfono: +1 234 567 890</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Cotizaciones Hoy. Todos los derechos reservados.</p>
-            </div>
-        </div>
+        <p>&copy; 2024 Tu Sitio. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Firebase SDK -->
+    <script src="script.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
 
         // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
             authDomain: "cotizaciones-hoy.firebaseapp.com",
@@ -107,10 +80,43 @@
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+
+        // Obtén el formulario y los elementos de mensaje
+        const registroForm = document.getElementById('registro-form');
+        const mensajeError = document.getElementById('mensaje-error');
+        const mensajeExito = document.getElementById('mensaje-exito');
+
+        // Escucha el evento submit del formulario
+        registroForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Evita que se recargue la página
+
+            // Obtén los valores del formulario
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Crea el usuario con correo electrónico y contraseña
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Registro exitoso
+                    const user = userCredential.user;
+                    console.log('Usuario registrado:', user);
+                    mensajeExito.textContent = 'Registro exitoso. ¡Bienvenido!';
+                    mensajeExito.classList.add('animate__animated', 'animate__fadeIn');
+                    // Redirige al usuario a la página de inicio o a donde desees
+                    setTimeout(() => {
+                        window.location.href = 'index.html'; // Reemplaza con tu URL
+                    }, 2000);
+                })
+                .catch((error) => {
+                    // Maneja los errores
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error('Error al registrar usuario:', errorCode, errorMessage);
+                    mensajeError.textContent = errorMessage;
+                });
+        });
     </script>
-    <!-- Include your JavaScript file -->
-    <script type="module" src="JavaScript/registrarse.js"></script>
-    <link rel="stylesheet" href="style.css">    
+    <link rel="stylesheet" href="style.css">
 </body>
 </html>
