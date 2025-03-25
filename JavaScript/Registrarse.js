@@ -39,14 +39,16 @@ registroForm.addEventListener('submit', (event) => {
 
   // Crea el usuario con correo electrónico y contraseña
   createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Registro exitoso
-      const user = userCredential.user;
-      console.log('Usuario registrado:', user);
-      showNotification('Registro exitoso', 'success');
-      // Redirige al usuario a la página de inicio o a donde desees
-      window.location.href = 'index.html'; // Reemplaza con tu URL
-    })
+  .then((userCredential) => {
+    // Registro exitoso
+    const user = userCredential.user;
+    console.log('Usuario registrado:', user);
+    showNotification('Registro exitoso', 'success');
+    // Redirige al usuario a la página de inicio o a donde desees
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 2000); // Redirige después de 2 segundos
+})
     .catch((error) => {
       // Maneja los errores
       const errorCode = error.code;
