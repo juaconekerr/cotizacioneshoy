@@ -3,32 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario</title>
+    <title>Registro de Usuario | Cotizaciones Hoy</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <a href="#" class="logo">MiAplicación</a>
-                <ul class="nav-links">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Servicios</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#" class="btn-login">Iniciar Sesión</a></li>
-                </ul>
+<body class="bg-gray-100 font-sans antialiased">
+    <div class="contenedor">
+        <div class="header">
+            <h1 class="titulo-principal">Cotizaciones Hoy</h1>
+            <!-- Menu de navegación -->
+            <div class="menu">
+                <button class="menu-boton">Menú</button>
+                <div class="menu-contenido">
+                    <a href="Buscador.html">Buscador</a>
+                    <a href="noticias.html">Noticias</a>
+                    <a href="contacto.html">Contacto</a>
+                    <a href="Iniciarsesion.html">Iniciar Sesion</a>
+                </div>
             </div>
-        </nav>
-    </header>
-
-    <main>
+        </div>
+        
         <section class="registration-section">
             <div class="container">
                 <div class="form-container">
                     <h2>Crear Cuenta</h2>
                     <p>Regístrate para acceder a nuestros servicios</p>
-                    <div id="error-message" class="error"></div>
+                    <div id="error-message" class="mensaje-error"></div>
                     <form id="registration-form">
                         <div class="form-group">
                             <label for="name">Nombre Completo</label>
@@ -49,16 +50,38 @@
                         <button type="submit" class="btn-submit">Registrarse</button>
                     </form>
                     <div class="form-footer">
-                        <p>¿Ya tienes una cuenta? <a href="#">Inicia sesión</a></p>
+                        <p>¿Ya tienes una cuenta? <a href="Iniciarsesion.html">Inicia sesión</a></p>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 MiAplicación. Todos los derechos reservados.</p>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Sobre Nosotros</h3>
+                    <p>Cotizaciones Hoy es una plataforma que ofrece información actualizada sobre las principales divisas del mundo.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Enlaces Útiles</h3>
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Servicios</a></li>
+                        <li><a href="#">Precios</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <p>Email: soporte@cotizacioneshoy.com</p>
+                    <p>Teléfono: +1 234 567 890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Cotizaciones Hoy. Todos los derechos reservados.</p>
+            </div>
         </div>
     </footer>
 
@@ -67,8 +90,11 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-        
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
         // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
             apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
             authDomain: "cotizaciones-hoy.firebaseapp.com",
@@ -85,28 +111,6 @@
     </script>
     <!-- Include your JavaScript file -->
     <script type="module" src="JavaScript/registrarse.js"></script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-          apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
-          authDomain: "cotizaciones-hoy.firebaseapp.com",
-          projectId: "cotizaciones-hoy",
-          storageBucket: "cotizaciones-hoy.firebasestorage.app",
-          messagingSenderId: "104412367418",
-          appId: "1:104412367418:web:0962a9c13738e088610303",
-          measurementId: "G-R5KRC3LZ70"
-        };
-      
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-      </script>
+    <link rel="stylesheet" href="style.css">    
 </body>
 </html>
