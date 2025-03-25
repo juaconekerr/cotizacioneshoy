@@ -31,7 +31,7 @@
     <main>
         <section class="registro-container">
             <h1 class="animate__animated animate__fadeInDown">Registro de usuario</h1>
-            <form id="registro-form" action="procesar_registro.php" method="POST">
+            <form id="registro-form">
                 <div class="form-group animate__animated animate__fadeInUp">
                     <label for="nombre_completo">Nombre completo:</label>
                     <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ingresa tu nombre completo" required>
@@ -53,6 +53,7 @@
                 </div>
                 <div id="mensaje-error" class="error-message"></div>
                 <div id="mensaje-exito" class="success-message animate__animated animate__fadeInUp"></div>
+                <div id="mensaje-password" class="error-message animate__animated animate__fadeInUp"></div>
             </form>
         </section>
     </main>
@@ -61,7 +62,6 @@
         <p>&copy; 2024 Tu Sitio. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="script.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
@@ -86,6 +86,31 @@
         const registroForm = document.getElementById('registro-form');
         const mensajeError = document.getElementById('mensaje-error');
         const mensajeExito = document.getElementById('mensaje-exito');
+        const mensajePassword = document.getElementById('mensaje-password');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+
+        // Función para mostrar mensajes de error
+        function showError(message, element) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        // Función para verificar si las contraseñas coinciden en tiempo real
+        function checkPasswordsMatch() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (password !== confirmPassword) {
+                showError('Las contraseñas no coinciden.', mensajePassword);
+            } else {
+                mensajePassword.style.display = 'none';
+            }
+        }
+
+        // Escucha los eventos de input para verificar si las contraseñas coinciden
+        passwordInput.addEventListener('input', checkPasswordsMatch);
+        confirmPasswordInput.addEventListener('input', checkPasswordsMatch);
 
         // Escucha el evento submit del formulario
         registroForm.addEventListener('submit', (event) => {
@@ -93,7 +118,14 @@
 
             // Obtén los valores del formulario
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Verifica si las contraseñas coinciden
+            if (password !== confirmPassword) {
+                showError('Las contraseñas no coinciden.', mensajePassword);
+                return; // Detiene el registro si las contraseñas no coinciden
+            }
 
             // Crea el usuario con correo electrónico y contraseña
             createUserWithEmailAndPassword(auth, email, password)
@@ -103,20 +135,20 @@
                     console.log('Usuario registrado:', user);
                     mensajeExito.textContent = 'Registro exitoso. ¡Bienvenido!';
                     mensajeExito.classList.add('animate__animated', 'animate__fadeIn');
-                    // Redirige al usuario a la página de inicio o a donde desees
+                    
+                    // Redirige al usuario a la página de búsqueda de divisas
                     setTimeout(() => {
-                        window.location.href = 'buscador.html'; // Reemplaza con tu URL
-                    }, 2000);
+                        window.location.href = 'buscador.html'; // Redirige a buscador.html
+                    }, 4000); // Redirige después de 4 segundos
                 })
                 .catch((error) => {
                     // Maneja los errores
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.error('Error al registrar usuario:', errorCode, errorMessage);
-                    mensajeError.textContent = errorMessage;
+                    showError(errorMessage, mensajeError);
                 });
         });
     </script>
-    <link rel="stylesheet" href="style.css">
 </body>
 </html>
