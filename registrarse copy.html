@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,6 +23,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .container {
             max-width: 600px;
             width: 100%;
@@ -30,21 +32,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
             text-align: center;
             color: #343a40;
         }
+
         .form-group {
             margin-bottom: 1rem;
         }
+
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: #495057;
         }
+
         input {
             width: 100%;
             padding: 10px;
@@ -53,23 +59,28 @@
             font-size: 16px;
             color: #495057;
         }
+
         input:focus {
             outline: none;
             border-color: #80bdff;
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
+
         .grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
+
         .grid-item {
             display: flex;
             flex-direction: column;
         }
+
         .full-width {
             grid-column: span 2;
         }
+
         button {
             width: 100%;
             padding: 10px;
@@ -82,13 +93,16 @@
             transition: background-color 0.3s ease;
             margin-top: 20px;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         button:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
+
         .message {
             display: none;
             padding: 1rem;
@@ -96,14 +110,17 @@
             border-radius: 0.375rem;
             text-align: center;
         }
+
         .error-message {
             background-color: #ffe5e5;
             color: #d8000c;
         }
+
         .success-message {
             background-color: #e6fffa;
             color: #2c7a7b;
         }
+
         .password-requirements {
             list-style-type: none;
             padding: 0;
@@ -112,15 +129,18 @@
             display: none;
             grid-column: span 2;
         }
+
         .password-requirements li {
             color: red;
             margin-bottom: 0.25rem;
         }
+
         .password-requirements li.valid {
             color: green;
         }
     </style>
 </head>
+
 <body class="bg-gray-100 font-sans antialiased">
     <div class="container">
         <h1>Registrarse</h1>
@@ -242,16 +262,11 @@
         }
 
         // Función para guardar los datos del usuario en Firebase Database
-        async function saveUserData(userId, nombre, apellido) {
-            try {
-                await set(ref(database, 'users/' + userId), {
-                    nombre: nombre,
-                    apellido: apellido
-                });
-                console.log('Datos del usuario guardados correctamente en Firebase Database');
-            } catch (error) {
-                console.error('Error al guardar los datos del usuario en Firebase Database:', error);
-            }
+        function saveUserData(userId, nombre, apellido) {
+            set(ref(database, 'users/' + userId), {
+                nombre: nombre,
+                apellido: apellido
+            });
         }
 
         // Escucha el evento submit del formulario
@@ -266,12 +281,12 @@
 
             // Crea una nueva cuenta de usuario
             createUserWithEmailAndPassword(auth, email, password)
-                .then(async (userCredential) => {
+                .then((userCredential) => {
                     // Registro exitoso
                     const user = userCredential.user;
                     console.log('Usuario registrado:', user);
                     // Guarda los datos adicionales del usuario en Firebase Database
-                    await saveUserData(user.uid, nombre, apellido);
+                    saveUserData(user.uid, nombre, apellido);
                     showSuccess(`Registro exitoso. Bienvenido, ${nombre}!`);
                     // Redirige a la página buscador.html
                     window.location.href = "buscador.html";
@@ -285,5 +300,7 @@
                 });
         });
     </script>
+    
 </body>
+
 </html>
