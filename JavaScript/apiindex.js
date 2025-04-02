@@ -42,6 +42,9 @@ async function cargarDivisas() {
     const divisasContainer = document.getElementById('divisas-container');
     const mensajeErrorElement = document.getElementById('mensaje-error');
 
+    // Limpiar el contenedor para evitar duplicaciones
+    divisasContainer.innerHTML = '';
+
     function obtenerTendencia(cambio) {
         if (cambio > 0) {
             return {
@@ -101,12 +104,13 @@ async function cargarDivisas() {
     }
 
     try {
-        divisas.forEach(divisa => {
+        // Crear y agregar las tarjetas de divisas al contenedor
+        divisas.slice(0, 10).forEach(divisa => {
             const tarjeta = crearTarjetaDivisa(divisa);
             divisasContainer.appendChild(tarjeta);
         });
 
-        const cotizacionesPromises = divisas.map(divisa => obtenerCotizacion(divisa.simbolo));
+        const cotizacionesPromises = divisas.slice(0, 10).map(divisa => obtenerCotizacion(divisa.simbolo));
         const resultados = await Promise.all(cotizacionesPromises);
 
         resultados.forEach((resultado, index) => {
