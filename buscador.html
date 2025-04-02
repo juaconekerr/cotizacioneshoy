@@ -59,6 +59,10 @@
             border-radius: 0.375rem;
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+            display: none; /* Ocultar lista por defecto */
+        }
+        .lista-divisas.visible {
+            display: block; /* Mostrar lista cuando se activa */
         }
         .lista-divisas div {
             padding: 0.75rem;
@@ -120,6 +124,72 @@
             color: #1a202c;
             text-align: center;
         }
+
+        /* Nuevos estilos para la visualización profesional del resultado */
+        .resultado-card {
+            background-color: #ffffff; /* Fondo blanco */
+            border-radius: 0.75rem; /* Bordes redondeados */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+            padding: 1.5rem; /* Espaciado interior */
+            margin-top: 2rem; /* Espacio superior */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .resultado-header {
+            font-size: 1.25rem; /* Tamaño de fuente del encabezado */
+            font-weight: 600; /* Negrita */
+            color: #1a202c; /* Color del texto */
+            margin-bottom: 1rem; /* Espacio inferior */
+        }
+        .resultado-body {
+            font-size: 2rem; /* Tamaño de fuente del cuerpo */
+            color: #1a202c; /* Color del texto */
+            margin-bottom: 1rem; /* Espacio inferior */
+        }
+        .resultado-valor {
+            font-weight: 700; /* Negrita */
+            color: #2563eb; /* Color azul */
+        }
+        .resultado-footer {
+            font-size: 0.875rem; /* Tamaño de fuente del pie */
+            color: #4a5568; /* Color del texto */
+            margin-top: 1rem; /* Espacio superior */
+        }
+        .error-message {
+            color: red; /* Color rojo para mensajes de error */
+            font-weight: 600; /* Negrita */
+        }
+
+        /* Estilos para mostrar y ocultar la lista de divisas */
+        .oculto {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
+
+        /* Estilos para la animación de carga */
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #2563eb;
+            animation: spin 1s ease infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans antialiased">
@@ -138,8 +208,8 @@
             </div>
         </div>
         <div class="buscador">
-            <input type="text" id="buscador-input" placeholder="Buscar divisa...">
-            <div id="lista-divisas" class="lista-divisas"></div>
+            <input type="text" id="buscador-input" placeholder="Buscar divisa..." onmouseover="mostrarListaDivisas()" onmouseout="ocultarListaDivisas()">
+            <div id="lista-divisas" class="lista-divisas oculto"></div>
         </div>
         <div id="resultado-cotizacion" class="resultado-cotizacion"></div>
     </div>
@@ -238,6 +308,8 @@
 
         // Función para mostrar la lista de divisas
         function mostrarListaDivisas() {
+            listaDivisas.classList.remove('oculto');
+            listaDivisas.classList.add('visible');
             listaDivisas.innerHTML = '';
             const valorBuscador = buscadorInput.value.toLowerCase();
             divisas.forEach(divisa => {
@@ -245,12 +317,29 @@
                     const div = document.createElement('div');
                     div.textContent = divisa;
                     div.addEventListener('click', async () => {
+                        mostrarSpinner();
                         const simbolo = divisa.split(' - ')[0];
                         try {
                             const cotizacion = await obtenerCotizacion(simbolo);
-                            resultadoCotizacion.textContent = `1 USD = ${cotizacion} ${simbolo}`;
+                            resultadoCotizacion.innerHTML = `
+                                <div class="resultado-card">
+                                    <div class="resultado-header">Cotización de ${simbolo}</div>
+                                    <div class="resultado-body">
+                                        <span>1 USD = </span>
+                                        <span class="resultado-valor">${cotizacion}</span>
+                                        <span> ${simbolo}</span>
+                                    </div>
+                                    <div class="resultado-footer">
+                                        Última actualización: ${new Date().toLocaleString()}
+                                    </div>
+                                </div>`;
                         } catch (error) {
-                            resultadoCotizacion.textContent = 'Error al obtener la cotización. Inténtelo de nuevo más tarde.';
+                            resultadoCotizacion.innerHTML = `
+                                <div class="error-message">
+                                    Error al obtener la cotización. Inténtelo de nuevo más tarde.
+                                </div>`;
+                        } finally {
+                            ocultarSpinner();
                         }
                     });
                     listaDivisas.appendChild(div);
@@ -258,7 +347,25 @@
             });
         }
 
+        function mostrarSpinner() {
+            resultadoCotizacion.innerHTML = '<div class="loading-spinner"></div>';
+        }
+
+        function ocultarSpinner() {
+            const spinner = document.querySelector('.loading-spinner');
+            if (spinner) {
+                spinner.remove();
+            }
+        }
+
         buscadorInput.addEventListener('input', mostrarListaDivisas);
+
+        function ocultarListaDivisas() {
+            if (!buscadorInput.value) {
+                listaDivisas.classList.remove('visible');
+                listaDivisas.classList.add('oculto');
+            }
+        }
 
         // Mostrar todas las divisas al cargar la página
         mostrarListaDivisas();
@@ -281,6 +388,5 @@
             }
         }
     </script>
-    <script src="JavaScript/buscador.js" defer></script>
 </body>
 </html>

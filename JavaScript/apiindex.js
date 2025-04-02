@@ -35,8 +35,8 @@ async function cargarDivisas() {
         { nombre: 'Franco Suizo', simbolo: 'CHF' },
         { nombre: 'Yuan Chino', simbolo: 'CNY' },
         { nombre: 'Peso Mexicano', simbolo: 'MXN' },
-        { nombre: 'Real Brasileño', simbolo: 'BRL' },
-        { nombre: 'Rublo Ruso', simbolo: 'RUB' }
+        { nombre: 'Real Brasileño', simbolo: 'BRL' }
+        // Eliminado: { nombre: 'Rublo Ruso', simbolo: 'RUB' }
     ];
 
     const divisasContainer = document.getElementById('divisas-container');
@@ -105,12 +105,12 @@ async function cargarDivisas() {
 
     try {
         // Crear y agregar las tarjetas de divisas al contenedor
-        divisas.slice(0, 10).forEach(divisa => {
+        divisas.forEach(divisa => {
             const tarjeta = crearTarjetaDivisa(divisa);
             divisasContainer.appendChild(tarjeta);
         });
 
-        const cotizacionesPromises = divisas.slice(0, 10).map(divisa => obtenerCotizacion(divisa.simbolo));
+        const cotizacionesPromises = divisas.map(divisa => obtenerCotizacion(divisa.simbolo));
         const resultados = await Promise.all(cotizacionesPromises);
 
         resultados.forEach((resultado, index) => {

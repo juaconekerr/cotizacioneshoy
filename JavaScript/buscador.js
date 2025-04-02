@@ -7,9 +7,23 @@ document.addEventListener('DOMContentLoaded', () => {
         if (simbolo) {
             try {
                 const cotizacion = await obtenerCotizacion(simbolo);
-                resultadoDiv.textContent = `1 USD = ${cotizacion} ${simbolo}`;
+                resultadoDiv.innerHTML = `
+                    <div class="resultado-card">
+                        <div class="resultado-header">Cotización de ${simbolo}</div>
+                        <div class="resultado-body">
+                            <span>1 USD = </span>
+                            <span class="resultado-valor">${cotizacion}</span>
+                            <span> ${simbolo}</span>
+                        </div>
+                        <div class="resultado-footer">
+                            Última actualización: ${new Date().toLocaleString()}
+                        </div>
+                    </div>`;
             } catch (error) {
-                resultadoDiv.textContent = 'Error al obtener la cotización. Inténtelo de nuevo más tarde.';
+                resultadoDiv.innerHTML = `
+                    <div class="error-message">
+                        Error al obtener la cotización. Inténtelo de nuevo más tarde.
+                    </div>`;
             }
         }
     });
