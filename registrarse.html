@@ -1,504 +1,570 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrarse</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #343a40;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #495057;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 16px;
-            color: #495057;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        .grid-item {
-            display: flex;
-            flex-direction: column;
-        }
-        .full-width {
-            grid-column: span 2;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-        .message {
-            display: none;
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0.375rem;
-            text-align: center;
-        }
-        .error-message {
-            background-color: #ffe5e5;
-            color: #d8000c;
-        }
-        .success-message {
-            background-color: #e6fffa;
-            color: #2c7a7b;
-        }
-        .password-requirements {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 0.5rem;
-            font-size: 0.875rem;
-            display: none;
-            grid-column: span 2;
-        }
-        .password-requirements li {
-            color: red;
-            margin-bottom: 0.25rem;
-        }
-        .password-requirements li.valid {
-            color: green;
-        }
-        .select-dropdown {
-            position: relative;
-        }
-        .select-dropdown select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns="http://www.w3.org/2000/svg"%20viewBox="0%200%204%205"><path%20fill="none"%20stroke="%23aaa"%20stroke-width="1.2"%20d="M2%204%20L0%202%20L4%202%20Z"/></svg>') no-repeat right 0.75rem center;
-            background-color: #fff;
-            background-size: 0.65rem auto;
-        }
-        .select-dropdown select:focus {
-            outline: none;
-            border-color: #80bdff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        max-width: 800px;
+        width: 100%;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #343a40;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #495057;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #495057;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+      .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .grid-item {
+        display: flex;
+        flex-direction: column;
+      }
+      .full-width {
+        grid-column: span 2;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff; /* Fondo azul */
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #0056b3; /* Fondo azul más oscuro al pasar el mouse */
+      }
+      button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+      .message {
+        display: none;
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 0.375rem;
+        text-align: center;
+      }
+      .error-message {
+        background-color: #ffe5e5;
+        color: #d8000c;
+      }
+      .success-message {
+        background-color: #e6fffa;
+        color: #2c7a7b;
+      }
+      .password-requirements {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        display: none;
+        grid-column: span 2;
+      }
+      .password-requirements li {
+        color: red;
+        margin-bottom: 0.25rem;
+      }
+      .password-requirements li.valid {
+        color: green;
+      }
+      .select-dropdown {
+        position: relative;
+      }
+      .select-dropdown select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('data:image/svg+xml;charset=US-ASCII,<svg%20xmlns="http://www.w3.org/2000/svg"%20viewBox="0%200%204%205"><path%20fill="none"%20stroke="%23aaa"%20stroke-width="1.2"%20d="M2%204%20L0%202%20L4%202%20Z"/></svg>')
+          no-repeat right 0.75rem center;
+        background-color: #fff;
+        background-size: 0.65rem auto;
+      }
+      .select-dropdown select:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
     </style>
-</head>
-<body class="bg-gray-100 font-sans antialiased">
+  </head>
+  <body class="bg-gray-100 font-sans antialiased">
     <div class="container">
-        <h1>Registrarse</h1>
-        <form id="register-form">
-            <div class="grid-container">
-                <div class="grid-item">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-                </div>
-                <div class="grid-item">
-                    <label for="apellido">Apellido</label>
-                    <input type="text" id="apellido" name="apellido" placeholder="Tu apellido" required>
-                </div>
-                <div class="grid-item full-width">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
-                </div>
-                <div class="grid-item full-width">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="Tu contraseña" required>
-                    <ul id="password-requirements" class="password-requirements">
-                        <li id="length" class="invalid">Al menos 8 caracteres</li>
-                        <li id="uppercase" class="invalid">Al menos una letra mayúscula</li>
-                        <li id="lowercase" class="invalid">Al menos una letra minúscula</li>
-                        <li id="number" class="invalid">Al menos un número</li>
-                        <li id="special" class="invalid">Al menos un carácter especial</li>
-                    </ul>
-                </div>
-                <div class="grid-item select-dropdown">
-                    <label for="pais">País de Origen</label>
-                    <select id="pais" name="pais" required>
-                        
-                        <option value="AF">Afganistán</option>
-                        <option value="AL">Albania</option>
-                        <option value="DE">Alemania</option>
-                        <option value="AD">Andorra</option>
-                        <option value="AO">Angola</option>
-                        <option value="AI">Anguila</option>
-                        <option value="AQ">Antártida</option>
-                        <option value="AG">Antigua y Barbuda</option>
-                        <option value="SA">Arabia Saudita</option>
-                        <option value="DZ">Argelia</option>
-                        <option value="AR">Argentina</option>
-                        <option value="AM">Armenia</option>
-                        <option value="AW">Aruba</option>
-                        <option value="AU">Australia</option>
-                        <option value="AT">Austria</option>
-                        <option value="AZ">Azerbaiyán</option>
-                        <option value="BS">Bahamas</option>
-                        <option value="BH">Baréin</option>
-                        <option value="BD">Bangladés</option>
-                        <option value="BB">Barbados</option>
-                        <option value="BE">Bélgica</option>
-                        <option value="BZ">Belice</option>
-                        <option value="BJ">Benín</option>
-                        <option value="BM">Bermudas</option>
-                        <option value="BY">Bielorrusia</option>
-                        <option value="MM">Birmania</option>
-                        <option value="BO">Bolivia</option>
-                        <option value="BA">Bosnia y Herzegovina</option>
-                        <option value="BW">Botsuana</option>
-                        <option value="BR">Brasil</option>
-                        <option value="BN">Brunéi</option>
-                        <option value="BG">Bulgaria</option>
-                        <option value="BF">Burkina Faso</option>
-                        <option value="BI">Burundi</option>
-                        <option value="BT">Bután</option>
-                        <option value="CV">Cabo Verde</option>
-                        <option value="KH">Camboya</option>
-                        <option value="CM">Camerún</option>
-                        <option value="CA">Canadá</option>
-                        <option value="QA">Catar</option>
-                        <option value="TD">Chad</option>
-                        <option value="CL">Chile</option>
-                        <option value="CN">China</option>
-                        <option value="CY">Chipre</option>
-                        <option value="VA">Ciudad del Vaticano</option>
-                        <option value="CO">Colombia</option>
-                        <option value="KM">Comoras</option>
-                        <option value="KP">Corea del Norte</option>
-                        <option value="KR">Corea del Sur</option>
-                        <option value="CI">Costa de Marfil</option>
-                        <option value="CR">Costa Rica</option>
-                        <option value="HR">Croacia</option>
-                        <option value="CU">Cuba</option>
-                        <option value="DK">Dinamarca</option>
-                        <option value="DM">Dominica</option>
-                        <option value="EC">Ecuador</option>
-                        <option value="EG">Egipto</option>
-                        <option value="SV">El Salvador</option>
-                        <option value="AE">Emiratos Árabes Unidos</option>
-                        <option value="ER">Eritrea</option>
-                        <option value="SK">Eslovaquia</option>
-                        <option value="SI">Eslovenia</option>
-                        <option value="ES">España</option>
-                        <option value="US">Estados Unidos</option>
-                        <option value="EE">Estonia</option>
-                        <option value="ET">Etiopía</option>
-                        <option value="PH">Filipinas</option>
-                        <option value="FI">Finlandia</option>
-                        <option value="FJ">Fiyi</option>
-                        <option value="FR">Francia</option>
-                        <option value="GA">Gabón</option>
-                        <option value="GM">Gambia</option>
-                        <option value="GE">Georgia</option>
-                        <option value="GH">Ghana</option>
-                        <option value="GI">Gibraltar</option>
-                        <option value="GD">Granada</option>
-                        <option value="GR">Grecia</option>
-                        <option value="GL">Groenlandia</option>
-                        <option value="GP">Guadalupe</option>
-                        <option value="GU">Guam</option>
-                        <option value="GT">Guatemala</option>
-                        <option value="GF">Guayana Francesa</option>
-                        <option value="GG">Guernesey</option>
-                        <option value="GN">Guinea</option>
-                        <option value="GQ">Guinea Ecuatorial</option>
-                        <option value="GW">Guinea-Bisáu</option>
-                        <option value="GY">Guyana</option>
-                        <option value="HT">Haití</option>
-                        <option value="HN">Honduras</option>
-                        <option value="HK">Hong Kong</option>
-                        <option value="HU">Hungría</option>
-                        <option value="IN">India</option>
-                        <option value="ID">Indonesia</option>
-                        <option value="IR">Irán</option>
-                        <option value="IQ">Irak</option>
-                        <option value="IE">Irlanda</option>
-                        <option value="BV">Isla Bouvet</option>
-                        <option value="IM">Isla de Man</option>
-                        <option value="CX">Isla de Navidad</option>
-                        <option value="NF">Isla Norfolk</option>
-                        <option value="IS">Islandia</option>
-                        <option value="KY">Islas Caimán</option>
-                        <option value="CC">Islas Cocos</option>
-                        <option value="CK">Islas Cook</option>
-                        <option value="FO">Islas Feroe</option>
-                        <option value="GS">Islas Georgias del Sur y Sandwich del Sur</option>
-                        <option value="HM">Islas Heard y McDonald</option>
-                        <option value="FK">Islas Malvinas</option>
-                        <option value="MP">Islas Marianas del Norte</option>
-                        <option value="MH">Islas Marshall</option>
-                        <option value="UM">Islas menores alejadas de los Estados Unidos</option>
-                        <option value="PN">Islas Pitcairn</option>
-                        <option value="SB">Islas Salomón</option>
-                        <option value="TC">Islas Turcas y Caicos</option>
-                        <option value="VG">Islas Vírgenes Británicas</option>
-                        <option value="VI">Islas Vírgenes de los Estados Unidos</option>
-                        <option value="IL">Israel</option>
-                        <option value="IT">Italia</option>
-                        <option value="JM">Jamaica</option>
-                        <option value="JP">Japón</option>
-                        <option value="JE">Jersey</option>
-                        <option value="JO">Jordania</option>
-                        <option value="KZ">Kazajistán</option>
-                        <option value="KE">Kenia</option>
-                        <option value="KG">Kirguistán</option>
-                        <option value="KI">Kiribati</option>
-                        <option value="KW">Kuwait</option>
-                        <option value="LA">Laos</option>
-                        <option value="LS">Lesoto</option>
-                        <option value="LV">Letonia</option>
-                        <option value="LB">Líbano</option>
-                        <option value="LR">Liberia</option>
-                        <option value="LY">Libia</option>
-                        <option value="LI">Liechtenstein</option>
-                        <option value="LT">Lituania</option>
-                        <option value="LU">Luxemburgo</option>
-                        <option value="MO">Macao</option>
-                            
-                    </select>
-                </div>
-                <div class="grid-item select-dropdown">
-                    <label for="divisas">Divisas Favoritas</label>
-                    <select id="divisas" name="divisas" required>
-                        <option value="AFN">AFN</option>
-                        <option value="ALL">ALL</option>
-                        <option value="EUR">EUR</option>
-                        <option value="EUR">EUR</option>
-                        <option value="AOA">AOA</option>
-                        <option value="XCD">XCD</option>
-                        <option value="AWG">AWG</option>
-                        <option value="ARS">ARS</option>
-                        <option value="AMD">AMD</option>
-                        <option value="AUD">AUD</option>
-                        <option value="AZN">AZN</option>
-                        <option value="BSD">BSD</option>
-                        <option value="BHD">BHD</option>
-                        <option value="BDT">BDT</option>
-                        <option value="BBD">BBD</option>
-                        <option value="BZD">BZD</option>
-                        <option value="BIF">BIF</option>
-                        <option value="BMD">BMD</option>
-                        <option value="BYN">BYN</option>
-                        <option value="MMK">MMK</option>
-                        <option value="BOB">BOB</option>
-                        <option value="BAM">BAM</option>
-                        <option value="BWP">BWP</option>
-                        <option value="BRL">BRL</option>
-                        <option value="BND">BND</option>
-                        <option value="BGN">BGN</option>
-                        <option value="FBU">FBU</option>
-                        <option value="BIF">BIF</option>
-                        <option value="BTN">BTN</option>
-                        <option value="CVE">CVE</option>
-                        <option value="KHR">KHR</option>
-                        <option value="CFA">CFA</option>
-                        <option value="CAD">CAD</option>
-                        <option value="QAR">QAR</option>
-                        <option value="XOF">XOF</option>
-                        <option value="COP">COP</option>
-                        <option value="PYG">PYG</option>
-                        <option value="CLP">CLP</option>
-                        <option value="CNY">CNY</option>
-                        <option value="PHP">PHP</option>
-                        <option value="BHD">BHD</option>
-                        <option value="BGN">BGN</option>
-                        <option value="HRK">HRK</option>
-                        <option value="CLP">CLP</option>
-                        <option value="CRV">CRV</option>
-                        <option value="KR">KR</option>
-                        <option value="JAP">JAP</option>
-                        
-                    </select>
-                </div>
-            </div>
-            <button type="submit" disabled id="register-button">Registrarse</button>
-            <div id="mensaje-error" class="message error-message"></div>
-            <div id="mensaje-exito" class="message success-message"></div>
-        </form>
-        <a href="Iniciarsesion.html" class="registro-link">¿Ya tienes una cuenta? Inicia sesión</a>
+      <h1>Registrarse</h1>
+      <form id="register-form">
+        <div class="grid-container">
+          <div class="grid-item">
+            <label for="nombre">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+          <div class="grid-item">
+            <label for="apellido">Apellido</label>
+            <input
+              type="text"
+              id="apellido"
+              name="apellido"
+              placeholder="Tu apellido"
+              required
+            />
+          </div>
+          <div class="grid-item full-width">
+            <label for="email">Correo Electrónico</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Tu correo electrónico"
+              required
+            />
+          </div>
+          <div class="grid-item full-width">
+            <label for="password">Contraseña</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Tu contraseña"
+              required
+            />
+            <ul id="password-requirements" class="password-requirements">
+              <li id="length" class="invalid">Al menos 8 caracteres</li>
+              <li id="uppercase" class="invalid">
+                Al menos una letra mayúscula
+              </li>
+              <li id="lowercase" class="invalid">
+                Al menos una letra minúscula
+              </li>
+              <li id="number" class="invalid">Al menos un número</li>
+              <li id="special" class="invalid">
+                Al menos un carácter especial
+              </li>
+            </ul>
+          </div>
+          <div class="grid-item select-dropdown">
+            <label for="pais">País de Origen</label>
+            <select id="pais" name="pais" required>
+              <option value="AF">Afganistán</option>
+              <option value="AL">Albania</option>
+              <option value="DE">Alemania</option>
+              <option value="AD">Andorra</option>
+              <option value="AO">Angola</option>
+              <option value="AI">Anguila</option>
+              <option value="AQ">Antártida</option>
+              <option value="AG">Antigua y Barbuda</option>
+              <option value="SA">Arabia Saudita</option>
+              <option value="DZ">Argelia</option>
+              <option value="AR">Argentina</option>
+              <option value="AM">Armenia</option>
+              <option value="AW">Aruba</option>
+              <option value="AU">Australia</option>
+              <option value="AT">Austria</option>
+              <option value="AZ">Azerbaiyán</option>
+              <option value="BS">Bahamas</option>
+              <option value="BH">Baréin</option>
+              <option value="BD">Bangladés</option>
+              <option value="BB">Barbados</option>
+              <option value="BE">Bélgica</option>
+              <option value="BZ">Belice</option>
+              <option value="BJ">Benín</option>
+              <option value="BM">Bermudas</option>
+              <option value="BY">Bielorrusia</option>
+              <option value="MM">Birmania</option>
+              <option value="BO">Bolivia</option>
+              <option value="BA">Bosnia y Herzegovina</option>
+              <option value="BW">Botsuana</option>
+              <option value="BR">Brasil</option>
+              <option value="BN">Brunéi</option>
+              <option value="BG">Bulgaria</option>
+              <option value="BF">Burkina Faso</option>
+              <option value="BI">Burundi</option>
+              <option value="BT">Bután</option>
+              <option value="CV">Cabo Verde</option>
+              <option value="KH">Camboya</option>
+              <option value="CM">Camerún</option>
+              <option value="CA">Canadá</option>
+              <option value="QA">Catar</option>
+              <option value="TD">Chad</option>
+              <option value="CL">Chile</option>
+              <option value="CN">China</option>
+              <option value="CY">Chipre</option>
+              <option value="VA">Ciudad del Vaticano</option>
+              <option value="CO">Colombia</option>
+              <option value="KM">Comoras</option>
+              <option value="KP">Corea del Norte</option>
+              <option value="KR">Corea del Sur</option>
+              <option value="CI">Costa de Marfil</option>
+              <option value="CR">Costa Rica</option>
+              <option value="HR">Croacia</option>
+              <option value="CU">Cuba</option>
+              <option value="DK">Dinamarca</option>
+              <option value="DM">Dominica</option>
+              <option value="EC">Ecuador</option>
+              <option value="EG">Egipto</option>
+              <option value="SV">El Salvador</option>
+              <option value="AE">Emiratos Árabes Unidos</option>
+              <option value="ER">Eritrea</option>
+              <option value="SK">Eslovaquia</option>
+              <option value="SI">Eslovenia</option>
+              <option value="ES">España</option>
+              <option value="US">Estados Unidos</option>
+              <option value="EE">Estonia</option>
+              <option value="ET">Etiopía</option>
+              <option value="PH">Filipinas</option>
+              <option value="FI">Finlandia</option>
+              <option value="FJ">Fiyi</option>
+              <option value="FR">Francia</option>
+              <option value="GA">Gabón</option>
+              <option value="GM">Gambia</option>
+              <option value="GE">Georgia</option>
+              <option value="GH">Ghana</option>
+              <option value="GI">Gibraltar</option>
+              <option value="GD">Granada</option>
+              <option value="GR">Grecia</option>
+              <option value="GL">Groenlandia</option>
+              <option value="GP">Guadalupe</option>
+              <option value="GU">Guam</option>
+              <option value="GT">Guatemala</option>
+              <option value="GF">Guayana Francesa</option>
+              <option value="GG">Guernesey</option>
+              <option value="GN">Guinea</option>
+              <option value="GQ">Guinea Ecuatorial</option>
+              <option value="GW">Guinea-Bisáu</option>
+              <option value="GY">Guyana</option>
+              <option value="HT">Haití</option>
+              <option value="HN">Honduras</option>
+              <option value="HK">Hong Kong</option>
+              <option value="HU">Hungría</option>
+              <option value="IN">India</option>
+              <option value="ID">Indonesia</option>
+              <option value="IR">Irán</option>
+              <option value="IQ">Irak</option>
+              <option value="IE">Irlanda</option>
+              <option value="BV">Isla Bouvet</option>
+              <option value="IM">Isla de Man</option>
+              <option value="CX">Isla de Navidad</option>
+              <option value="NF">Isla Norfolk</option>
+              <option value="IS">Islandia</option>
+              <option value="KY">Islas Caimán</option>
+              <option value="CC">Islas Cocos</option>
+              <option value="CK">Islas Cook</option>
+              <option value="FO">Islas Feroe</option>
+              <option value="GS">
+                Islas Georgias del Sur y Sandwich del Sur
+              </option>
+              <option value="HM">Islas Heard y McDonald</option>
+              <option value="FK">Islas Malvinas</option>
+              <option value="MP">Islas Marianas del Norte</option>
+              <option value="MH">Islas Marshall</option>
+              <option value="UM">
+                Islas menores alejadas de los Estados Unidos
+              </option>
+              <option value="PN">Islas Pitcairn</option>
+              <option value="SB">Islas Salomón</option>
+              <option value="TC">Islas Turcas y Caicos</option>
+              <option value="VG">Islas Vírgenes Británicas</option>
+              <option value="VI">Islas Vírgenes de los Estados Unidos</option>
+              <option value="IL">Israel</option>
+              <option value="IT">Italia</option>
+              <option value="JM">Jamaica</option>
+              <option value="JP">Japón</option>
+              <option value="JE">Jersey</option>
+              <option value="JO">Jordania</option>
+              <option value="KZ">Kazajistán</option>
+              <option value="KE">Kenia</option>
+              <option value="KG">Kirguistán</option>
+              <option value="KI">Kiribati</option>
+              <option value="KW">Kuwait</option>
+              <option value="LA">Laos</option>
+              <option value="LS">Lesoto</option>
+              <option value="LV">Letonia</option>
+              <option value="LB">Líbano</option>
+              <option value="LR">Liberia</option>
+              <option value="LY">Libia</option>
+              <option value="LI">Liechtenstein</option>
+              <option value="LT">Lituania</option>
+              <option value="LU">Luxemburgo</option>
+              <option value="MO">Macao</option>
+            </select>
+          </div>
+          <div class="grid-item select-dropdown">
+            <label for="divisas">Divisas Favoritas</label>
+            <select id="divisas" name="divisas" required>
+              <option value="AFN">AFN</option>
+              <option value="ALL">ALL</option>
+              <option value="EUR">EUR</option>
+              <option value="EUR">EUR</option>
+              <option value="AOA">AOA</option>
+              <option value="XCD">XCD</option>
+              <option value="AWG">AWG</option>
+              <option value="ARS">ARS</option>
+              <option value="AMD">AMD</option>
+              <option value="AUD">AUD</option>
+              <option value="AZN">AZN</option>
+              <option value="BSD">BSD</option>
+              <option value="BHD">BHD</option>
+              <option value="BDT">BDT</option>
+              <option value="BBD">BBD</option>
+              <option value="BZD">BZD</option>
+              <option value="BIF">BIF</option>
+              <option value="BMD">BMD</option>
+              <option value="BYN">BYN</option>
+              <option value="MMK">MMK</option>
+              <option value="BOB">BOB</option>
+              <option value="BAM">BAM</option>
+              <option value="BWP">BWP</option>
+              <option value="BRL">BRL</option>
+              <option value="BND">BND</option>
+              <option value="BGN">BGN</option>
+              <option value="FBU">FBU</option>
+              <option value="BIF">BIF</option>
+              <option value="BTN">BTN</option>
+              <option value="CVE">CVE</option>
+              <option value="KHR">KHR</option>
+              <option value="CFA">CFA</option>
+              <option value="CAD">CAD</option>
+              <option value="QAR">QAR</option>
+              <option value="XOF">XOF</option>
+              <option value="COP">COP</option>
+              <option value="PYG">PYG</option>
+              <option value="CLP">CLP</option>
+              <option value="CNY">CNY</option>
+              <option value="PHP">PHP</option>
+              <option value="BHD">BHD</option>
+              <option value="BGN">BGN</option>
+              <option value="HRK">HRK</option>
+              <option value="CLP">CLP</option>
+              <option value="CRV">CRV</option>
+              <option value="KR">KR</option>
+              <option value="JAP">JAP</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" disabled id="register-button">Registrarse</button>
+        <div id="mensaje-error" class="message error-message"></div>
+        <div id="mensaje-exito" class="message success-message"></div>
+      </form>
+      <a href="Iniciarsesion.html" class="registro-link"
+        >¿Ya tienes una cuenta? Inicia sesión</a
+      >
     </div>
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+      } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
-            authDomain: "cotizaciones-hoy.firebaseapp.com",
-            databaseURL: "https://cotizaciones-hoy-default-rtdb.firebaseio.com",
-            projectId: "cotizaciones-hoy",
-            storageBucket: "cotizaciones-hoy.firebasestorage.app",
-            messagingSenderId: "104412367418",
-            appId: "1:104412367418:web:0962a9c13738e088610303",
-            measurementId: "G-R5KRC3LZ70"
-        };
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
+        authDomain: "cotizaciones-hoy.firebaseapp.com",
+        databaseURL: "https://cotizaciones-hoy-default-rtdb.firebaseio.com",
+        projectId: "cotizaciones-hoy",
+        storageBucket: "cotizaciones-hoy.firebasestorage.app",
+        messagingSenderId: "104412367418",
+        appId: "1:104412367418:web:0962a9c13738e088610303",
+        measurementId: "G-R5KRC3LZ70",
+      };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const database = getDatabase(app);
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const database = getDatabase(app);
 
-        // Obtén el formulario y los elementos de mensaje
-        const registerForm = document.getElementById('register-form');
-        const mensajeError = document.getElementById('mensaje-error');
-        const mensajeExito = document.getElementById('mensaje-exito');
-        const nombreInput = document.getElementById('nombre');
-        const apellidoInput = document.getElementById('apellido');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const divisasInput = document.getElementById('divisas');
-        const paisInput = document.getElementById('pais');
-        const registerButton = document.getElementById('register-button');
-        const passwordRequirements = document.getElementById('password-requirements');
+      // Obtén el formulario y los elementos de mensaje
+      const registerForm = document.getElementById("register-form");
+      const mensajeError = document.getElementById("mensaje-error");
+      const mensajeExito = document.getElementById("mensaje-exito");
+      const nombreInput = document.getElementById("nombre");
+      const apellidoInput = document.getElementById("apellido");
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const divisasInput = document.getElementById("divisas");
+      const paisInput = document.getElementById("pais");
+      const registerButton = document.getElementById("register-button");
+      const passwordRequirements = document.getElementById(
+        "password-requirements"
+      );
 
-        // Validación de la contraseña en tiempo real
-        const requirements = {
-            length: document.getElementById('length'),
-            uppercase: document.getElementById('uppercase'),
-            lowercase: document.getElementById('lowercase'),
-            number: document.getElementById('number'),
-            special: document.getElementById('special')
-        };
+      // Validación de la contraseña en tiempo real
+      const requirements = {
+        length: document.getElementById("length"),
+        uppercase: document.getElementById("uppercase"),
+        lowercase: document.getElementById("lowercase"),
+        number: document.getElementById("number"),
+        special: document.getElementById("special"),
+      };
 
-        function validatePassword(password) {
-            const lengthValid = password.length >= 8;
-            const uppercaseValid = /[A-Z]/.test(password);
-            const lowercaseValid = /[a-z]/.test(password);
-            const numberValid = /[0-9]/.test(password);
-            const specialValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+      function validatePassword(password) {
+        const lengthValid = password.length >= 8;
+        const uppercaseValid = /[A-Z]/.test(password);
+        const lowercaseValid = /[a-z]/.test(password);
+        const numberValid = /[0-9]/.test(password);
+        const specialValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-            requirements.length.className = lengthValid ? 'valid' : 'invalid';
-            requirements.uppercase.className = uppercaseValid ? 'valid' : 'invalid';
-            requirements.lowercase.className = lowercaseValid ? 'valid' : 'invalid';
-            requirements.number.className = numberValid ? 'valid' : 'invalid';
-            requirements.special.className = specialValid ? 'valid' : 'invalid';
+        requirements.length.className = lengthValid ? "valid" : "invalid";
+        requirements.uppercase.className = uppercaseValid ? "valid" : "invalid";
+        requirements.lowercase.className = lowercaseValid ? "valid" : "invalid";
+        requirements.number.className = numberValid ? "valid" : "invalid";
+        requirements.special.className = specialValid ? "valid" : "invalid";
 
-            return lengthValid && uppercaseValid && lowercaseValid && numberValid && specialValid;
+        return (
+          lengthValid &&
+          uppercaseValid &&
+          lowercaseValid &&
+          numberValid &&
+          specialValid
+        );
+      }
+
+      function showPasswordRequirements() {
+        passwordRequirements.style.display = "block";
+      }
+
+      passwordInput.addEventListener("input", (event) => {
+        showPasswordRequirements();
+        const password = event.target.value;
+        const isValid = validatePassword(password);
+        registerButton.disabled = !isValid;
+      });
+
+      // Función para mostrar mensajes de error
+      function showError(message) {
+        const defaultErrorMessage =
+          "Registro incorrecto. Por favor, inténtalo de nuevo.";
+        mensajeError.textContent = message || defaultErrorMessage;
+        mensajeError.style.display = "block";
+        mensajeExito.style.display = "none";
+      }
+
+      // Función para mostrar mensajes de éxito
+      function showSuccess(message) {
+        mensajeExito.textContent = message;
+        mensajeExito.style.display = "block";
+        mensajeError.style.display = "none";
+      }
+
+      // Función para guardar los datos del usuario en Firebase Database
+      async function saveUserData(userId, nombre, apellido, divisas, pais) {
+        try {
+          await set(ref(database, "users/" + userId), {
+            nombre: nombre,
+            apellido: apellido,
+            divisas: divisas,
+            pais: pais,
+          });
+          console.log(
+            "Datos del usuario guardados correctamente en Firebase Database"
+          );
+        } catch (error) {
+          console.error(
+            "Error al guardar los datos del usuario en Firebase Database:",
+            error
+          );
         }
+      }
 
-        function showPasswordRequirements() {
-            passwordRequirements.style.display = 'block';
-        }
+      // Escucha el evento submit del formulario
+      registerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
 
-        passwordInput.addEventListener('input', (event) => {
-            showPasswordRequirements();
-            const password = event.target.value;
-            const isValid = validatePassword(password);
-            registerButton.disabled = !isValid;
-        });
+        // Obtén los valores del formulario
+        const nombre = nombreInput.value;
+        const apellido = apellidoInput.value;
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        const divisas = divisasInput.value;
+        const pais = paisInput.value;
 
-        // Función para mostrar mensajes de error
-        function showError(message) {
-            const defaultErrorMessage = "Registro incorrecto. Por favor, inténtalo de nuevo.";
-            mensajeError.textContent = message || defaultErrorMessage;
-            mensajeError.style.display = 'block';
-            mensajeExito.style.display = 'none';
-        }
-
-        // Función para mostrar mensajes de éxito
-        function showSuccess(message) {
-            mensajeExito.textContent = message;
-            mensajeExito.style.display = 'block';
-            mensajeError.style.display = 'none';
-        }
-
-        // Función para guardar los datos del usuario en Firebase Database
-        async function saveUserData(userId, nombre, apellido, divisas, pais) {
-            try {
-                await set(ref(database, 'users/' + userId), {
-                    nombre: nombre,
-                    apellido: apellido,
-                    divisas: divisas,
-                    pais: pais
-                });
-                console.log('Datos del usuario guardados correctamente en Firebase Database');
-            } catch (error) {
-                console.error('Error al guardar los datos del usuario en Firebase Database:', error);
-            }
-        }
-
-        // Escucha el evento submit del formulario
-        registerForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            // Obtén los valores del formulario
-            const nombre = nombreInput.value;
-            const apellido = apellidoInput.value;
-            const email = emailInput.value;
-            const password = passwordInput.value;
-            const divisas = divisasInput.value;
-            const pais = paisInput.value;
-
-            // Crea una nueva cuenta de usuario
-            createUserWithEmailAndPassword(auth, email, password)
-                .then(async (userCredential) => {
-                    // Registro exitoso
-                    const user = userCredential.user;
-                    console.log('Usuario registrado:', user);
-                    // Guarda los datos adicionales del usuario en Firebase Database
-                    await saveUserData(user.uid, nombre, apellido, divisas, pais);
-                    showSuccess(`Registro exitoso. Bienvenido, ${nombre}!`);
-                    // Redirige a la página buscador.html
-                    window.location.href = "buscador.html";
-                })
-                .catch((error) => {
-                    // Maneja los errores
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.error('Error al registrar:', errorCode, errorMessage);
-                    showError('Registro incorrecto. Por favor, inténtalo de nuevo.');
-                });
-        });
+        // Crea una nueva cuenta de usuario
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(async (userCredential) => {
+            // Registro exitoso
+            const user = userCredential.user;
+            console.log("Usuario registrado:", user);
+            // Guarda los datos adicionales del usuario en Firebase Database
+            await saveUserData(user.uid, nombre, apellido, divisas, pais);
+            showSuccess(`Registro exitoso. Bienvenido, ${nombre}!`);
+            // Espera 3 segundos antes de redireccionar
+            setTimeout(() => {
+              // Redirige a la página buscador.html
+              window.location.href = "buscador.html";
+            }, 3000); // 3000 milisegundos = 3 segundos
+          })
+          .catch((error) => {
+            // Maneja los errores
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error("Error al registrar:", errorCode, errorMessage);
+            showError("Registro incorrecto. Por favor, inténtalo de nuevo.");
+          });
+      });
     </script>
-</body>
+  </body>
 </html>

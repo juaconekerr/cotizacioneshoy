@@ -1,316 +1,345 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cotizaciones Hoy</title>
-    <meta name="description" content="Obtén información actualizada sobre las principales divisas del mundo.">
-    <meta name="keywords" content="divisas, cotización, tipo de cambio, moneda, dólar, euro, yen">
-    <meta name="author" content="Tu Nombre">
-    <link rel="canonical" href="https://tu-sitio.com/">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta
+      name="description"
+      content="Obtén información actualizada sobre las principales divisas del mundo."
+    />
+    <meta
+      name="keywords"
+      content="divisas, cotización, tipo de cambio, moneda, dólar, euro, yen"
+    />
+    <meta name="author" content="Tu Nombre" />
+    <link rel="canonical" href="https://tu-sitio.com/" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="JavaScript/apiindex.js" defer></script>
     <style>
-        /* Estilos personalizados para la página principal */
-        body {
-            background-color: #f7fafc; /* Color de fondo muy claro */
-        }
-        .contenedor {
-            max-width: 1200px; /* Ancho máximo del contenido */
-            margin: 0 auto; /* Centrar el contenido */
-            padding: 2rem; /* Espaciado interior */
-        }
-        .header {
-            display: flex;
-            justify-content: space-between; /* Espacio entre el título y el botón */
-            align-items: center; /* Alinear verticalmente */
-            margin-bottom: 2rem; /* Espacio debajo del header */
-        }
-        .titulo-principal {
-            font-size: 3rem; /* Tamaño de fuente grande */
-            font-weight: 700; /* Negrita */
-            color: #1a202c; /* Color de texto muy oscuro */
-        }
-        .subtitulo-principal {
-            font-size: 1.25rem; /* Tamaño de fuente mediano */
-            color: #4a5568; /* Color de texto un poco más claro */
-            margin-bottom: 4rem; /* Espacio debajo del subtítulo */
-            text-align: center;
-        }
-        .tarjeta-divisa {
-            background-color: #ffffff; /* Fondo blanco para las tarjetas */
-            border-radius: 0.75rem; /* Bordes redondeados */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
-            padding: 2rem; /* Espaciado interior en las tarjetas */
-            transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
-            margin-bottom: 2rem; /* Espacio debajo de cada tarjeta */
-        }
-        .tarjeta-divisa:hover {
-            transform: translateY(-0.25rem); /* Ligeramente hacia arriba al pasar el mouse */
-            box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15), 0 3px 5px -1px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el mouse */
-        }
-        .nombre-divisa {
-            font-size: 1.5rem; /* Tamaño de fuente más grande para el nombre de la divisa */
-            font-weight: 600; /* Negrita */
-            color: #2d3748; /* Color de texto oscuro */
-            margin-bottom: 1rem; /* Espacio debajo del nombre */
-            display: flex; /* Para alinear nombre y símbolo */
-            align-items: center; /* Centrar verticalmente */
-            gap: 0.5rem; /* Espacio entre nombre y símbolo */
-        }
-        .simbolo-divisa {
-            font-size: 1rem; /* Tamaño de fuente para el símbolo */
-            color: #718096; /* Color de texto más claro para el símbolo */
-        }
-        .cotizacion {
-            font-size: 2.25rem; /* Tamaño de fuente muy grande para la cotización */
-            font-weight: 700; /* Negrita */
-            color: #3b82f6; /* Color azul para la cotización */
-            margin-bottom: 1rem; /* Espacio debajo de la cotización */
-        }
-        .tendencia {
-            display: flex; /* Para alinear ícono y texto */
-            align-items: center; /* Centrar verticalmente */
-            gap: 0.5rem; /* Espacio entre ícono y texto */
-            font-size: 1rem; /* Tamaño de fuente para la tendencia */
-            color: #4a5568; /* Color de texto para la tendencia */
-        }
-        .icono-tendencia {
-            width: 1rem; /* Tamaño del ícono */
-            height: 1rem;
-        }
-        .enlace-detalle {
-            display: inline-flex; /* Para un mejor control del espaciado */
-            align-items: center; /* Centrar verticalmente el texto y el ícono */
-            gap: 0.5rem; /* Espacio entre el texto y el ícono */
-            margin-top: 1.5rem; /* Espacio sobre el enlace */
-            color: #3b82f6; /* Color azul para el enlace */
-            font-weight: 600; /* Negrita */
-            text-decoration: none; /* Sin subrayado por defecto */
-            transition: color 0.2s ease, text-decoration 0.2s ease; /* Transiciones suaves */
-        }
-        .enlace-detalle:hover {
-            color: #2563eb; /* Color azul más oscuro al pasar el mouse */
-            text-decoration: underline; /* Subrayado al pasar el mouse */
-        }
-        .icono-enlace {
-            width: 0.75rem; /* Tamaño del ícono */
-            height: 0.75rem;
-        }
-        .mensaje-error {
-            background-color: #fecaca; /* Fondo rojo claro para el error */
-            color: #b91c1c; /* Color de texto rojo oscuro para el error */
-            padding: 1rem; /* Espaciado interior */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            margin-top: 2rem; /* Espacio sobre el mensaje de error */
-            text-align: center; /* Centrar el texto */
-            font-weight: 600; /* Negrita */
-            display: none; /* Oculto por defecto */
-        }
-        /* Estilos para el menú desplegable */
-        .menu {
-            position: relative;
-            display: inline-block;
-        }
-        .menu-boton {
-            background-color: #3b82f6; /* Fondo azul */
-            color: white; /* Texto blanco */
-            padding: 0.75rem 1.5rem; /* Espaciado interior */
-            font-size: 1rem; /* Tamaño de fuente */
-            font-weight: 600; /* Negrita */
-            border: none; /* Sin borde */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            cursor: pointer; /* Cursor de mano */
-            transition: background-color 0.2s ease; /* Transición suave */
-        }
-        .menu-boton:hover {
-            background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
-        }
-        .menu-contenido {
-            display: none; /* Oculto por defecto */
-            position: absolute;
-            background-color: white; /* Fondo blanco */
-            min-width: 12rem; /* Ancho mínimo */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            z-index: 1; /* Asegurar que esté por encima de otros elementos */
-            top: 100%; /* Desplegar el contenido del menú por debajo del botón */
-            right: 0; /* Alinear el contenido del menú a la derecha */
-        }
-        .menu-contenido a {
-            color: #1a202c; /* Color de texto oscuro */
-            padding: 1rem; /* Espaciado interior */
-            text-decoration: none; /* Sin subrayado */
-            display: block; /* Mostrar como bloque */
-            font-weight: 600; /* Negrita */
-        }
-        .menu-contenido a:hover {
-            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
-        }
-        .menu:hover .menu-contenido {
-            display: block; /* Mostrar menú al pasar el mouse */
-        }
-        .menu:hover .menu-boton {
-            background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
-        }
+      /* Estilos personalizados para la página principal */
+      body {
+        background-color: #f7fafc; /* Color de fondo muy claro */
+      }
+      .contenedor {
+        max-width: 1200px; /* Ancho máximo del contenido */
+        margin: 0 auto; /* Centrar el contenido */
+        padding: 2rem; /* Espaciado interior */
+      }
+      .header {
+        display: flex;
+        justify-content: space-between; /* Espacio entre el título y el botón */
+        align-items: center; /* Alinear verticalmente */
+        margin-bottom: 2rem; /* Espacio debajo del header */
+      }
+      .titulo-principal {
+        font-size: 3rem; /* Tamaño de fuente grande */
+        font-weight: 700; /* Negrita */
+        color: #1a202c; /* Color de texto muy oscuro */
+      }
+      .subtitulo-principal {
+        font-size: 1.25rem; /* Tamaño de fuente mediano */
+        color: #4a5568; /* Color de texto un poco más claro */
+        margin-bottom: 4rem; /* Espacio debajo del subtítulo */
+        text-align: center;
+      }
+      .tarjeta-divisa {
+        background-color: #ffffff; /* Fondo blanco para las tarjetas */
+        border-radius: 0.75rem; /* Bordes redondeados */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        padding: 2rem; /* Espaciado interior en las tarjetas */
+        transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transiciones suaves */
+        margin-bottom: 2rem; /* Espacio debajo de cada tarjeta */
+      }
+      .tarjeta-divisa:hover {
+        transform: translateY(
+          -0.25rem
+        ); /* Ligeramente hacia arriba al pasar el mouse */
+        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15),
+          0 3px 5px -1px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada al pasar el mouse */
+      }
+      .nombre-divisa {
+        font-size: 1.5rem; /* Tamaño de fuente más grande para el nombre de la divisa */
+        font-weight: 600; /* Negrita */
+        color: #2d3748; /* Color de texto oscuro */
+        margin-bottom: 1rem; /* Espacio debajo del nombre */
+        display: flex; /* Para alinear nombre y símbolo */
+        align-items: center; /* Centrar verticalmente */
+        gap: 0.5rem; /* Espacio entre nombre y símbolo */
+      }
+      .simbolo-divisa {
+        font-size: 1rem; /* Tamaño de fuente para el símbolo */
+        color: #718096; /* Color de texto más claro para el símbolo */
+      }
+      .cotizacion {
+        font-size: 2.25rem; /* Tamaño de fuente muy grande para la cotización */
+        font-weight: 700; /* Negrita */
+        color: #3b82f6; /* Color azul para la cotización */
+        margin-bottom: 1rem; /* Espacio debajo de la cotización */
+      }
+      .tendencia {
+        display: flex; /* Para alinear ícono y texto */
+        align-items: center; /* Centrar verticalmente */
+        gap: 0.5rem; /* Espacio entre ícono y texto */
+        font-size: 1rem; /* Tamaño de fuente para la tendencia */
+        color: #4a5568; /* Color de texto para la tendencia */
+      }
+      .icono-tendencia {
+        width: 1rem; /* Tamaño del ícono */
+        height: 1rem;
+      }
+      .enlace-detalle {
+        display: inline-flex; /* Para un mejor control del espaciado */
+        align-items: center; /* Centrar verticalmente el texto y el ícono */
+        gap: 0.5rem; /* Espacio entre el texto y el ícono */
+        margin-top: 1.5rem; /* Espacio sobre el enlace */
+        color: #3b82f6; /* Color azul para el enlace */
+        font-weight: 600; /* Negrita */
+        text-decoration: none; /* Sin subrayado por defecto */
+        transition: color 0.2s ease, text-decoration 0.2s ease; /* Transiciones suaves */
+      }
+      .enlace-detalle:hover {
+        color: #2563eb; /* Color azul más oscuro al pasar el mouse */
+        text-decoration: underline; /* Subrayado al pasar el mouse */
+      }
+      .icono-enlace {
+        width: 0.75rem; /* Tamaño del ícono */
+        height: 0.75rem;
+      }
+      .mensaje-error {
+        background-color: #fecaca; /* Fondo rojo claro para el error */
+        color: #b91c1c; /* Color de texto rojo oscuro para el error */
+        padding: 1rem; /* Espaciado interior */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        margin-top: 2rem; /* Espacio sobre el mensaje de error */
+        text-align: center; /* Centrar el texto */
+        font-weight: 600; /* Negrita */
+        display: none; /* Oculto por defecto */
+      }
+      /* Estilos para el menú desplegable */
+      .menu {
+        position: relative;
+        display: inline-block;
+      }
+      .menu-boton {
+        background-color: #3b82f6; /* Fondo azul */
+        color: white; /* Texto blanco */
+        padding: 0.75rem 1.5rem; /* Espaciado interior */
+        font-size: 1rem; /* Tamaño de fuente */
+        font-weight: 600; /* Negrita */
+        border: none; /* Sin borde */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        cursor: pointer; /* Cursor de mano */
+        transition: background-color 0.2s ease; /* Transición suave */
+      }
+      .menu-boton:hover {
+        background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
+      }
+      .menu-contenido {
+        display: none; /* Oculto por defecto */
+        position: absolute;
+        background-color: white; /* Fondo blanco */
+        min-width: 12rem; /* Ancho mínimo */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        z-index: 1; /* Asegurar que esté por encima de otros elementos */
+        top: 100%; /* Desplegar el contenido del menú por debajo del botón */
+        right: 0; /* Alinear el contenido del menú a la derecha */
+      }
+      .menu-contenido a {
+        color: #1a202c; /* Color de texto oscuro */
+        padding: 1rem; /* Espaciado interior */
+        text-decoration: none; /* Sin subrayado */
+        display: block; /* Mostrar como bloque */
+        font-weight: 600; /* Negrita */
+      }
+      .menu-contenido a:hover {
+        background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+      }
+      .menu:hover .menu-contenido {
+        display: block; /* Mostrar menú al pasar el mouse */
+      }
+      .menu:hover .menu-boton {
+        background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
+      }
     </style>
-</head>
-<body class="bg-gray-100 font-sans antialiased">
+  </head>
+  <body class="bg-gray-100 font-sans antialiased">
     <div class="contenedor">
-        <div class="header">
-            <h1 class="titulo-principal">Cotización de Divisas en Tiempo Real</h1>
-            <!-- Menu de navegación -->
-            <div class="menu">
-                <button class="menu-boton">Menú</button>
-                <div class="menu-contenido">
-                    <a href="buscador.html">Buscador</a>
-                    <a href="noticias.html">Noticias</a>
-                    <a href="contacto.html">Contacto</a>
-                    <a href="iniciarsesion.html">Iniciar Sesion</a>
-                </div>
-            </div>
+      <div class="header">
+        <h1 class="titulo-principal">Cotización de Divisas en Tiempo Real</h1>
+        <!-- Menu de navegación -->
+        <div class="menu">
+          <button class="menu-boton">Menú</button>
+          <div class="menu-contenido">
+            <a href="buscador.html">Buscador</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="iniciarsesion.html">Iniciar Sesion</a>
+          </div>
         </div>
-        <p class="subtitulo-principal">Información actualizada de las principales monedas del mundo, en base al dolar estadounidense.</p>
-        <div id="divisas-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Las tarjetas de divisas se generarán aquí -->
-        </div>
-        <div id="mensaje-error" class="mensaje-error">Error al cargar las divisas. Por favor, inténtalo de nuevo más tarde.</div>
+      </div>
+      <p class="subtitulo-principal">
+        Información actualizada de las principales monedas del mundo, en base al
+        dolar estadounidense.
+      </p>
+      <div
+        id="divisas-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Las tarjetas de divisas se generarán aquí -->
+      </div>
+      <div id="mensaje-error" class="mensaje-error">
+        Error al cargar las divisas. Por favor, inténtalo de nuevo más tarde.
+      </div>
     </div>
     <script>
-        async function obtenerCotizacion(simbolo) {
-            const apiKey = '55f56fac8fa6472cbbdd03b5'; // Reemplaza con tu clave API
-            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+      async function obtenerCotizacion(simbolo) {
+        const apiKey = "55f56fac8fa6472cbbdd03b5"; // Reemplaza con tu clave API
+        const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
 
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-                }
-                const data = await response.json();
-                const cotizacion = data.conversion_rates[simbolo];
-                const cambio = (Math.random() - 0.5) * 2; // Simular cambio para la tendencia
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(
+              `Error en la solicitud: ${response.status} ${response.statusText}`
+            );
+          }
+          const data = await response.json();
+          const cotizacion = data.conversion_rates[simbolo];
+          const cambio = (Math.random() - 0.5) * 2; // Simular cambio para la tendencia
 
-                if (cotizacion) {
-                    return {
-                        cotizacion: cotizacion.toFixed(2), // Redondear a 2 decimales
-                        cambio: cambio.toFixed(2) // Redondear a 2 decimales
-                    };
-                } else {
-                    throw new Error(`No se pudo obtener la cotización para ${simbolo}`);
-                }
-            } catch (error) {
-                console.error('Error al obtener la cotización:', error);
-                throw new Error('No se pudo obtener la cotización');
-            }
+          if (cotizacion) {
+            return {
+              cotizacion: cotizacion.toFixed(2), // Redondear a 2 decimales
+              cambio: cambio.toFixed(2), // Redondear a 2 decimales
+            };
+          } else {
+            throw new Error(`No se pudo obtener la cotización para ${simbolo}`);
+          }
+        } catch (error) {
+          console.error("Error al obtener la cotización:", error);
+          throw new Error("No se pudo obtener la cotización");
+        }
+      }
+
+      async function cargarDivisas() {
+        const divisas = [
+          { nombre: "Dólar Estadounidense", simbolo: "USD" },
+          { nombre: "Euro", simbolo: "EUR" },
+          { nombre: "Yen Japonés", simbolo: "JPY" },
+          { nombre: "Libra Esterlina", simbolo: "GBP" },
+          { nombre: "Dólar Canadiense", simbolo: "CAD" },
+          { nombre: "Franco Suizo", simbolo: "CHF" },
+          { nombre: "Yuan Chino", simbolo: "CNY" },
+          { nombre: "Peso Mexicano", simbolo: "MXN" },
+          { nombre: "Real Brasileño", simbolo: "BRL" },
+        ];
+
+        const divisasContainer = document.getElementById("divisas-container");
+        const mensajeErrorElement = document.getElementById("mensaje-error");
+
+        // Limpiar el contenedor para evitar duplicaciones
+        divisasContainer.innerHTML = "";
+
+        function obtenerTendencia(cambio) {
+          if (cambio > 0) {
+            return {
+              tendencia: "Subiendo",
+              icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 4v12m4-7h-8"/><path fill="currentColor" d="M10 4l6 6-6 6"/></svg>`, // Flecha arriba
+              color: "text-green-500", // Verde para subida
+            };
+          } else if (cambio < 0) {
+            return {
+              tendencia: "Bajando",
+              icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 16V4m-4 7h8"/><path fill="currentColor" d="M10 16l-6-6 6-6"/></svg>`, // Flecha abajo
+              color: "text-red-500", // Rojo para bajada
+            };
+          } else {
+            return {
+              tendencia: "Estable",
+              icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M16 8H4v4h12V8z"/></svg>`, // Línea horizontal
+              color: "text-gray-500", // Gris para estable
+            };
+          }
         }
 
-        async function cargarDivisas() {
-            const divisas = [
-                { nombre: 'Dólar Estadounidense', simbolo: 'USD' },
-                { nombre: 'Euro', simbolo: 'EUR' },
-                { nombre: 'Yen Japonés', simbolo: 'JPY' },
-                { nombre: 'Libra Esterlina', simbolo: 'GBP' },
-                { nombre: 'Dólar Canadiense', simbolo: 'CAD' },
-                { nombre: 'Franco Suizo', simbolo: 'CHF' },
-                { nombre: 'Yuan Chino', simbolo: 'CNY' },
-                { nombre: 'Peso Mexicano', simbolo: 'MXN' },
-                { nombre: 'Real Brasileño', simbolo: 'BRL' },
-            ];
-
-            const divisasContainer = document.getElementById('divisas-container');
-            const mensajeErrorElement = document.getElementById('mensaje-error');
-
-            // Limpiar el contenedor para evitar duplicaciones
-            divisasContainer.innerHTML = '';
-
-            function obtenerTendencia(cambio) {
-                if (cambio > 0) {
-                    return {
-                        tendencia: 'Subiendo',
-                        icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 4v12m4-7h-8"/><path fill="currentColor" d="M10 4l6 6-6 6"/></svg>`, // Flecha arriba
-                        color: 'text-green-500' // Verde para subida
-                    };
-                } else if (cambio < 0) {
-                    return {
-                        tendencia: 'Bajando',
-                        icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M10 16V4m-4 7h8"/><path fill="currentColor" d="M10 16l-6-6 6-6"/></svg>`, // Flecha abajo
-                        color: 'text-red-500' // Rojo para bajada
-                    };
-                } else {
-                    return {
-                        tendencia: 'Estable',
-                        icono: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M16 8H4v4h12V8z"/></svg>`, // Línea horizontal
-                        color: 'text-gray-500' // Gris para estable
-                    };
-                }
-            }
-
-            function crearTarjetaDivisa(divisa) {
-                const tarjetaDivisa = document.createElement('div');
-                tarjetaDivisa.className = 'tarjeta-divisa';
-                const nombreDivisa = document.createElement('h2');
-                nombreDivisa.className = 'nombre-divisa';
-                nombreDivisa.textContent = divisa.nombre;
-                const simboloDivisa = document.createElement('span');
-                simboloDivisa.className = 'simbolo-divisa';
-                simboloDivisa.textContent = ` (${divisa.simbolo})`;
-                nombreDivisa.appendChild(simboloDivisa);
-                const cotizacionDivisa = document.createElement('p');
-                cotizacionDivisa.className = 'cotizacion';
-                cotizacionDivisa.textContent = 'Cargando...';
-                const tendenciaDivisa = document.createElement('div');
-                tendenciaDivisa.className = 'tendencia';
-                const iconoTendencia = document.createElement('span');
-                iconoTendencia.className = 'icono-tendencia';
-                const textoTendencia = document.createElement('span');
-                textoTendencia.className = 'texto-tendencia';
-                const enlaceDetalle = document.createElement('a');
-                enlaceDetalle.className = 'enlace-detalle';
-                enlaceDetalle.href = `detalle.html?simbolo=${divisa.simbolo}`;
-                enlaceDetalle.textContent = 'Ver Detalle';
-                const iconoEnlace = document.createElement('span');
-                iconoEnlace.className = 'icono-enlace';
-                iconoEnlace.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>`;
-                enlaceDetalle.appendChild(iconoEnlace);
-                tendenciaDivisa.appendChild(iconoTendencia);
-                tendenciaDivisa.appendChild(textoTendencia);
-                tarjetaDivisa.appendChild(nombreDivisa);
-                tarjetaDivisa.appendChild(cotizacionDivisa);
-                tarjetaDivisa.appendChild(tendenciaDivisa);
-                tarjetaDivisa.appendChild(enlaceDetalle);
-                return tarjetaDivisa;
-            }
-
-            try {
-                for (let i = 0; i < divisas.length; i++) {
-                    const divisa = divisas[i];
-                    const tarjeta = crearTarjetaDivisa(divisa);
-                    divisasContainer.appendChild(tarjeta);
-                }
-
-                const cotizacionesPromises = divisas.map(divisa => obtenerCotizacion(divisa.simbolo));
-                const resultados = await Promise.all(cotizacionesPromises);
-
-                resultados.forEach((resultado, index) => {
-                    const tarjeta = divisasContainer.children[index];
-                    const cotizacionElement = tarjeta.querySelector('.cotizacion');
-                    const tendenciaElement = tarjeta.querySelector('.tendencia');
-                    const iconoTendenciaElement = tarjeta.querySelector('.icono-tendencia');
-                    const textoTendenciaElement = tarjeta.querySelector('.texto-tendencia');
-                    cotizacionElement.textContent = resultado.cotizacion;
-                    const { tendencia, icono, color } = obtenerTendencia(resultado.cambio);
-                    iconoTendenciaElement.innerHTML = icono;
-                    textoTendenciaElement.textContent = tendencia;
-                    tendenciaElement.className = `tendencia ${color}`;
-                });
-            } catch (error) {
-                console.error('Error al cargar las divisas:', error);
-                mensajeErrorElement.style.display = 'block';
-            }
+        function crearTarjetaDivisa(divisa) {
+          const tarjetaDivisa = document.createElement("div");
+          tarjetaDivisa.className = "tarjeta-divisa";
+          const nombreDivisa = document.createElement("h2");
+          nombreDivisa.className = "nombre-divisa";
+          nombreDivisa.textContent = divisa.nombre;
+          const simboloDivisa = document.createElement("span");
+          simboloDivisa.className = "simbolo-divisa";
+          simboloDivisa.textContent = ` (${divisa.simbolo})`;
+          nombreDivisa.appendChild(simboloDivisa);
+          const cotizacionDivisa = document.createElement("p");
+          cotizacionDivisa.className = "cotizacion";
+          cotizacionDivisa.textContent = "Cargando...";
+          const tendenciaDivisa = document.createElement("div");
+          tendenciaDivisa.className = "tendencia";
+          const iconoTendencia = document.createElement("span");
+          iconoTendencia.className = "icono-tendencia";
+          const textoTendencia = document.createElement("span");
+          textoTendencia.className = "texto-tendencia";
+          const enlaceDetalle = document.createElement("a");
+          enlaceDetalle.className = "enlace-detalle";
+          enlaceDetalle.href = `detalle.html?simbolo=${divisa.simbolo}`;
+          enlaceDetalle.textContent = "Ver Detalle";
+          const iconoEnlace = document.createElement("span");
+          iconoEnlace.className = "icono-enlace";
+          iconoEnlace.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill="currentColor" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/></svg>`;
+          enlaceDetalle.appendChild(iconoEnlace);
+          tendenciaDivisa.appendChild(iconoTendencia);
+          tendenciaDivisa.appendChild(textoTendencia);
+          tarjetaDivisa.appendChild(nombreDivisa);
+          tarjetaDivisa.appendChild(cotizacionDivisa);
+          tarjetaDivisa.appendChild(tendenciaDivisa);
+          tarjetaDivisa.appendChild(enlaceDetalle);
+          return tarjetaDivisa;
         }
 
-        cargarDivisas();
+        try {
+          for (let i = 0; i < divisas.length; i++) {
+            const divisa = divisas[i];
+            const tarjeta = crearTarjetaDivisa(divisa);
+            divisasContainer.appendChild(tarjeta);
+          }
+
+          const cotizacionesPromises = divisas.map((divisa) =>
+            obtenerCotizacion(divisa.simbolo)
+          );
+          const resultados = await Promise.all(cotizacionesPromises);
+
+          resultados.forEach((resultado, index) => {
+            const tarjeta = divisasContainer.children[index];
+            const cotizacionElement = tarjeta.querySelector(".cotizacion");
+            const tendenciaElement = tarjeta.querySelector(".tendencia");
+            const iconoTendenciaElement =
+              tarjeta.querySelector(".icono-tendencia");
+            const textoTendenciaElement =
+              tarjeta.querySelector(".texto-tendencia");
+            cotizacionElement.textContent = resultado.cotizacion;
+            const { tendencia, icono, color } = obtenerTendencia(
+              resultado.cambio
+            );
+            iconoTendenciaElement.innerHTML = icono;
+            textoTendenciaElement.textContent = tendencia;
+            tendenciaElement.className = `tendencia ${color}`;
+          });
+        } catch (error) {
+          console.error("Error al cargar las divisas:", error);
+          mensajeErrorElement.style.display = "block";
+        }
+      }
+
+      cargarDivisas();
     </script>
-</body>
+  </body>
 </html>

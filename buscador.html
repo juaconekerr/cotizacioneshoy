@@ -1,327 +1,341 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Buscador</title>
-    <meta name="description" content="Busca información sobre divisas.">
-    <meta name="keywords" content="buscador, divisas, información, búsqueda">
-    <meta name="author" content="Tu Nombre">
-    <link rel="canonical" href="https://tu-sitio.com/buscador.html">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Busca información sobre divisas." />
+    <meta name="keywords" content="buscador, divisas, información, búsqueda" />
+    <meta name="author" content="Tu Nombre" />
+    <link rel="canonical" href="https://tu-sitio.com/buscador.html" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <style>
-        /* Estilos personalizados para la página de buscador */
-        body {
-            background-color: #f7fafc; /* Color de fondo muy claro */
-        }
-        .contenedor {
-            max-width: 1200px; /* Ancho máximo del contenido */
-            margin: 0 auto; /* Centrar el contenido */
-            padding: 2rem; /* Espaciado interior */
-        }
-        .header {
-            display: flex;
-            justify-content: space-between; /* Espacio entre el título y el botón */
-            align-items: center; /* Alinear verticalmente */
-            margin-bottom: 2rem; /* Espacio debajo del header */
-        }
-        .titulo-principal {
-            font-size: 3rem; /* Tamaño de fuente grande */
-            font-weight: 700; /* Negrita */
-            color: #1a202c; /* Color de texto muy oscuro */
-        }
-        .subtitulo-principal {
-            font-size: 1.25rem; /* Tamaño de fuente mediano */
-            color: #4a5568; /* Color de texto un poco más claro */
-            margin-bottom: 4rem; /* Espacio debajo del subtítulo */
-            text-align: center;
-        }
-        .buscador {
-            background-color: #ffffff; /* Fondo blanco para el buscador */
-            border-radius: 0.75rem; /* Bordes redondeados */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
-            padding: 2rem; /* Espaciado interior en el buscador */
-            margin-bottom: 2rem; /* Espacio debajo del buscador */
-        }
-        .buscador input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #cbd5e0;
-            border-radius: 0.375rem;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        .lista-divisas {
-            max-height: 300px; /* Altura máxima para la lista de divisas */
-            overflow-y: auto; /* Habilitar el scroll vertical */
-            border: 1px solid #cbd5e0;
-            border-radius: 0.375rem;
-            background-color: #ffffff;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
-            display: none; /* Ocultar lista por defecto */
-        }
-        .lista-divisas.visible {
-            display: block; /* Mostrar lista cuando se activa */
-        }
-        .lista-divisas div {
-            padding: 0.75rem;
-            border-bottom: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .lista-divisas div:hover {
-            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
-        }
-        .menu {
-            position: relative;
-            display: inline-block;
-        }
-        .menu-boton {
-            background-color: #3b82f6; /* Fondo azul */
-            color: white; /* Texto blanco */
-            padding: 0.75rem 1.5rem; /* Espaciado interior */
-            font-size: 1rem; /* Tamaño de fuente */
-            font-weight: 600; /* Negrita */
-            border: none; /* Sin borde */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            cursor: pointer; /* Cursor de mano */
-            transition: background-color 0.2s ease; /* Transición suave */
-        }
-        .menu-boton:hover {
-            background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
-        }
-        .menu-contenido {
-            display: none; /* Oculto por defecto */
-            position: absolute;
-            background-color: white; /* Fondo blanco */
-            min-width: 12rem; /* Ancho mínimo */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            z-index: 1; /* Asegurar que esté por encima de otros elementos */
-            top: 100%; /* Desplegar el contenido del menú por debajo del botón */
-            right: 0; /* Alinear el contenido del menú a la derecha */
-        }
-        .menu-contenido a {
-            color: #1a202c; /* Color de texto oscuro */
-            padding: 1rem; /* Espaciado interior */
-            text-decoration: none; /* Sin subrayado */
-            display: block; /* Mostrar como bloque */
-            font-weight: 600; /* Negrita */
-        }
-        .menu-contenido a:hover {
-            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
-        }
-        .menu:hover .menu-contenido {
-            display: block; /* Mostrar menú al pasar el mouse */
-        }
-        .menu:hover .menu-boton {
-            background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
-        }
-        .resultado-cotizacion {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            color: #1a202c;
-            text-align: center;
-        }
+      /* Estilos personalizados para la página de buscador */
+      body {
+        background-color: #f7fafc; /* Color de fondo muy claro */
+      }
+      .contenedor {
+        max-width: 1200px; /* Ancho máximo del contenido */
+        margin: 0 auto; /* Centrar el contenido */
+        padding: 2rem; /* Espaciado interior */
+      }
+      .header {
+        display: flex;
+        justify-content: space-between; /* Espacio entre el título y el botón */
+        align-items: center; /* Alinear verticalmente */
+        margin-bottom: 2rem; /* Espacio debajo del header */
+      }
+      .titulo-principal {
+        font-size: 3rem; /* Tamaño de fuente grande */
+        font-weight: 700; /* Negrita */
+        color: #1a202c; /* Color de texto muy oscuro */
+      }
+      .subtitulo-principal {
+        font-size: 1.25rem; /* Tamaño de fuente mediano */
+        color: #4a5568; /* Color de texto un poco más claro */
+        margin-bottom: 4rem; /* Espacio debajo del subtítulo */
+        text-align: center;
+      }
+      .buscador {
+        background-color: #ffffff; /* Fondo blanco para el buscador */
+        border-radius: 0.75rem; /* Bordes redondeados */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        padding: 2rem; /* Espaciado interior en el buscador */
+        margin-bottom: 2rem; /* Espacio debajo del buscador */
+      }
+      .buscador input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #cbd5e0;
+        border-radius: 0.375rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      .lista-divisas {
+        max-height: 300px; /* Altura máxima para la lista de divisas */
+        overflow-y: auto; /* Habilitar el scroll vertical */
+        border: 1px solid #cbd5e0;
+        border-radius: 0.375rem;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        display: none; /* Ocultar lista por defecto */
+      }
+      .lista-divisas.visible {
+        display: block; /* Mostrar lista cuando se activa */
+      }
+      .lista-divisas div {
+        padding: 0.75rem;
+        border-bottom: 1px solid #e2e8f0;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      .lista-divisas div:hover {
+        background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+      }
+      .menu {
+        position: relative;
+        display: inline-block;
+      }
+      .menu-boton {
+        background-color: #3b82f6; /* Fondo azul */
+        color: white; /* Texto blanco */
+        padding: 0.75rem 1.5rem; /* Espaciado interior */
+        font-size: 1rem; /* Tamaño de fuente */
+        font-weight: 600; /* Negrita */
+        border: none; /* Sin borde */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        cursor: pointer; /* Cursor de mano */
+        transition: background-color 0.2s ease; /* Transición suave */
+      }
+      .menu-boton:hover {
+        background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
+      }
+      .menu-contenido {
+        display: none; /* Oculto por defecto */
+        position: absolute;
+        background-color: white; /* Fondo blanco */
+        min-width: 12rem; /* Ancho mínimo */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        z-index: 1; /* Asegurar que esté por encima de otros elementos */
+        top: 100%; /* Desplegar el contenido del menú por debajo del botón */
+        right: 0; /* Alinear el contenido del menú a la derecha */
+      }
+      .menu-contenido a {
+        color: #1a202c; /* Color de texto oscuro */
+        padding: 1rem; /* Espaciado interior */
+        text-decoration: none; /* Sin subrayado */
+        display: block; /* Mostrar como bloque */
+        font-weight: 600; /* Negrita */
+      }
+      .menu-contenido a:hover {
+        background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+      }
+      .menu:hover .menu-contenido {
+        display: block; /* Mostrar menú al pasar el mouse */
+      }
+      .menu:hover .menu-boton {
+        background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
+      }
+      .resultado-cotizacion {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+        color: #1a202c;
+        text-align: center;
+      }
 
-        /* Nuevos estilos para la visualización profesional del resultado */
-        .resultado-card {
-            background-color: #ffffff; /* Fondo blanco */
-            border-radius: 0.75rem; /* Bordes redondeados */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
-            padding: 1.5rem; /* Espaciado interior */
-            margin-top: 2rem; /* Espacio superior */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .resultado-header {
-            font-size: 1.25rem; /* Tamaño de fuente del encabezado */
-            font-weight: 600; /* Negrita */
-            color: #1a202c; /* Color del texto */
-            margin-bottom: 1rem; /* Espacio inferior */
-        }
-        .resultado-body {
-            font-size: 2rem; /* Tamaño de fuente del cuerpo */
-            color: #1a202c; /* Color del texto */
-            margin-bottom: 1rem; /* Espacio inferior */
-        }
-        .resultado-valor {
-            font-weight: 700; /* Negrita */
-            color: #2563eb; /* Color azul */
-        }
-        .resultado-footer {
-            font-size: 0.875rem; /* Tamaño de fuente del pie */
-            color: #4a5568; /* Color del texto */
-            margin-top: 1rem; /* Espacio superior */
-        }
-        .error-message {
-            color: red; /* Color rojo para mensajes de error */
-            font-weight: 600; /* Negrita */
-        }
+      /* Nuevos estilos para la visualización profesional del resultado */
+      .resultado-card {
+        background-color: #ffffff; /* Fondo blanco */
+        border-radius: 0.75rem; /* Bordes redondeados */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra suave */
+        padding: 1.5rem; /* Espaciado interior */
+        margin-top: 2rem; /* Espacio superior */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .resultado-header {
+        font-size: 1.25rem; /* Tamaño de fuente del encabezado */
+        font-weight: 600; /* Negrita */
+        color: #1a202c; /* Color del texto */
+        margin-bottom: 1rem; /* Espacio inferior */
+      }
+      .resultado-body {
+        font-size: 2rem; /* Tamaño de fuente del cuerpo */
+        color: #1a202c; /* Color del texto */
+        margin-bottom: 1rem; /* Espacio inferior */
+      }
+      .resultado-valor {
+        font-weight: 700; /* Negrita */
+        color: #2563eb; /* Color azul */
+      }
+      .resultado-footer {
+        font-size: 0.875rem; /* Tamaño de fuente del pie */
+        color: #4a5568; /* Color del texto */
+        margin-top: 1rem; /* Espacio superior */
+      }
+      .error-message {
+        color: red; /* Color rojo para mensajes de error */
+        font-weight: 600; /* Negrita */
+      }
 
-        /* Estilos para mostrar y ocultar la lista de divisas */
-        .oculto {
-            display: none;
-        }
+      /* Estilos para mostrar y ocultar la lista de divisas */
+      .oculto {
+        display: none;
+      }
 
-        .visible {
-            display: block;
-        }
+      .visible {
+        display: block;
+      }
 
-        /* Estilos para la animación de carga */
-        .loading-spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border-left-color: #2563eb;
-            animation: spin 1s ease infinite;
-            margin: 0 auto;
-        }
+      /* Estilos para la animación de carga */
+      .loading-spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border-left-color: #2563eb;
+        animation: spin 1s ease infinite;
+        margin: 0 auto;
+      }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
-</head>
-<body class="bg-gray-100 font-sans antialiased">
+  </head>
+  <body class="bg-gray-100 font-sans antialiased">
     <div class="contenedor">
-        <div class="header">
-            <h1 class="titulo-principal">Buscador de Divisas</h1>
-            <!-- Menu de navegación -->
-            <div class="menu">
-                <button class="menu-boton">Menú</button>
-                <div class="menu-contenido">
-                    <a href="buscador.html">Buscador</a>
-                    <a href="noticias.html">Noticias</a>
-                    <a href="contacto.html">Contacto</a>
-                    <a href="iniciarsesion.html">Iniciar Sesion</a>
-                </div>
-            </div>
+      <div class="header">
+        <h1 class="titulo-principal">Buscador de Divisas</h1>
+        <!-- Menu de navegación -->
+        <div class="menu">
+          <button class="menu-boton">Menú</button>
+          <div class="menu-contenido">
+            <a href="buscador.html">Buscador</a>
+            <a href="noticias.html">Noticias</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="iniciarsesion.html">Iniciar Sesion</a>
+          </div>
         </div>
-        <div class="buscador">
-            <input type="text" id="buscador-input" placeholder="Buscar divisa..." onmouseover="mostrarListaDivisas()" onmouseout="ocultarListaDivisas()">
-            <div id="lista-divisas" class="lista-divisas oculto"></div>
-        </div>
-        <div id="resultado-cotizacion" class="resultado-cotizacion"></div>
+      </div>
+      <div class="buscador">
+        <input
+          type="text"
+          id="buscador-input"
+          placeholder="Buscar divisa..."
+          onmouseover="mostrarListaDivisas()"
+          onmouseout="ocultarListaDivisas()"
+        />
+        <div id="lista-divisas" class="lista-divisas oculto"></div>
+      </div>
+      <div id="resultado-cotizacion" class="resultado-cotizacion"></div>
     </div>
     <script>
-        // Lista de divisas ordenada alfabéticamente
-        const divisas = [
-            'AFN - Afgani Afgano',
-'ALL - Lek Albanés',
-'AOA - Kwanza Angoleño',
-'EUR - Euro',
-'SAR - Rial Saudí',
-'DZD - Dinar Argelino',
-'ARS - Peso Argentino',
-'AMD - Dram Armenio',
-'AWG - Florín de Aruba',
-'AZN - Manat Azerbaiyano',
-'BSD - Dólar Bahameño',
-'BHD - Dinar Bareiní',
-'BDT - Taka Bangladesí',
-'BBD - Dólar de Barbados',
-'BZD - Dólar de Belice',
-'BMD - Dólar de Bermudas',
-'BYN - Rublo Bielorruso',
-'MMK - Kyat Birmano',
-'BOB - Boliviano',
-'BAM - Marco Convertible',
-'BWP - Pula de Botsuana',
-'BRL - Real Brasileño',
-'BND - Dólar de Brunéi',
-'BGN - Lev Búlgaro',
-'BIF - Franco Burundés',
-'BTN - Ngultrum Butanés',
-'CVE - Escudo Caboverdiano',
-'KHR - Riel Camboyano',
-'CAD - Dólar Canadiense',
-'QAR - Rial Catarí',
-'CLP - Peso Chileno',
-'CNY - Yuan Chino',
-'COP - Peso Colombiano',
-'KMF - Franco Comorense',
-'KPW - Won Norcoreano',
-'KRW - Won Surcoreano',
-'CRC - Colón Costarricense',
-'HRK - Kuna Croata',
-'CUP - Peso Cubano',
-'EGP - Libra Egipcia',
-'AED - Dírham de los Emiratos Árabes Unidos',
-'ERN - Nakfa Eritreo',
-'ETB - Birr Etíope',
-'PHP - Peso Filipino',
-'FJD - Dólar Fiyiano',
-'GMD - Dalasi Gambiano',
-'GEL - Lari Georgiano',
-'GHS - Cedi Ghanés',
-'GIP - Libra de Gibraltar',
-'GTQ - Quetzal Guatemalteco',
-'GBP - Libra de Guernesey',
-'GNF - Franco Guineano',
-'GYD - Dólar de Guyana',
-'HTG - Gourde Haitiano',
-'HNL - Lempira Hondureño',
-'HKD - Dólar de Hong Kong',
-'HUF - Forinto Húngaro',
-'INR - Rupia India',
-'IDR - Rupia Indonesia',
-'IRR - Rial Iraní',
-'IQD - Dinar Iraquí',
-'GBP - Libra de la Isla de Man',
-'ISK - Corona Islandesa',
-'KYD - Dólar de las Islas Caimán',
-'FKP - Libra de las Islas Malvinas',
-'SBD - Dólar de las Islas Salomón',
-'ILS - Nuevo Shekel Israelí',
-'JMD - Dólar Jamaicano',
-'JPY - Yen Japonés',
-'GBP - Libra de Jersey',
-'JOD - Dinar Jordano',
-'KZT - Tenge Kazajo',
-'KES - Chelín Keniano',
-'KGS - Som Kirguís',
-'KWD - Dinar Kuwaití',
-'LAK - Kip Lao',
-'LSL - Loti Lesotense',
-'LBP - Libra Libanesa',
-'LRD - Dólar Liberiano',
-'LYD - Dinar Libio',
-'CHF - Franco Suizo',
-'MOP - Pataca de Macao'
+      // Lista de divisas ordenada alfabéticamente
+      const divisas = [
+        "AFN - Afgani Afgano",
+        "ALL - Lek Albanés",
+        "AOA - Kwanza Angoleño",
+        "EUR - Euro",
+        "SAR - Rial Saudí",
+        "DZD - Dinar Argelino",
+        "ARS - Peso Argentino",
+        "AMD - Dram Armenio",
+        "AWG - Florín de Aruba",
+        "AZN - Manat Azerbaiyano",
+        "BSD - Dólar Bahameño",
+        "BHD - Dinar Bareiní",
+        "BDT - Taka Bangladesí",
+        "BBD - Dólar de Barbados",
+        "BZD - Dólar de Belice",
+        "BMD - Dólar de Bermudas",
+        "BYN - Rublo Bielorruso",
+        "MMK - Kyat Birmano",
+        "BOB - Boliviano",
+        "BAM - Marco Convertible",
+        "BWP - Pula de Botsuana",
+        "BRL - Real Brasileño",
+        "BND - Dólar de Brunéi",
+        "BGN - Lev Búlgaro",
+        "BIF - Franco Burundés",
+        "BTN - Ngultrum Butanés",
+        "CVE - Escudo Caboverdiano",
+        "KHR - Riel Camboyano",
+        "CAD - Dólar Canadiense",
+        "QAR - Rial Catarí",
+        "CLP - Peso Chileno",
+        "CNY - Yuan Chino",
+        "COP - Peso Colombiano",
+        "KMF - Franco Comorense",
+        "KPW - Won Norcoreano",
+        "KRW - Won Surcoreano",
+        "CRC - Colón Costarricense",
+        "HRK - Kuna Croata",
+        "CUP - Peso Cubano",
+        "EGP - Libra Egipcia",
+        "AED - Dírham de los Emiratos Árabes Unidos",
+        "ERN - Nakfa Eritreo",
+        "ETB - Birr Etíope",
+        "PHP - Peso Filipino",
+        "FJD - Dólar Fiyiano",
+        "GMD - Dalasi Gambiano",
+        "GEL - Lari Georgiano",
+        "GHS - Cedi Ghanés",
+        "GIP - Libra de Gibraltar",
+        "GTQ - Quetzal Guatemalteco",
+        "GBP - Libra de Guernesey",
+        "GNF - Franco Guineano",
+        "GYD - Dólar de Guyana",
+        "HTG - Gourde Haitiano",
+        "HNL - Lempira Hondureño",
+        "HKD - Dólar de Hong Kong",
+        "HUF - Forinto Húngaro",
+        "INR - Rupia India",
+        "IDR - Rupia Indonesia",
+        "IRR - Rial Iraní",
+        "IQD - Dinar Iraquí",
+        "GBP - Libra de la Isla de Man",
+        "ISK - Corona Islandesa",
+        "KYD - Dólar de las Islas Caimán",
+        "FKP - Libra de las Islas Malvinas",
+        "SBD - Dólar de las Islas Salomón",
+        "ILS - Nuevo Shekel Israelí",
+        "JMD - Dólar Jamaicano",
+        "JPY - Yen Japonés",
+        "GBP - Libra de Jersey",
+        "JOD - Dinar Jordano",
+        "KZT - Tenge Kazajo",
+        "KES - Chelín Keniano",
+        "KGS - Som Kirguís",
+        "KWD - Dinar Kuwaití",
+        "LAK - Kip Lao",
+        "LSL - Loti Lesotense",
+        "LBP - Libra Libanesa",
+        "LRD - Dólar Liberiano",
+        "LYD - Dinar Libio",
+        "CHF - Franco Suizo",
+        "MOP - Pataca de Macao",
 
-            // Agrega más divisas aquí
-        ].sort();
+        // Agrega más divisas aquí
+      ].sort();
 
-        const buscadorInput = document.getElementById('buscador-input');
-        const listaDivisas = document.getElementById('lista-divisas');
-        const resultadoCotizacion = document.getElementById('resultado-cotizacion');
+      const buscadorInput = document.getElementById("buscador-input");
+      const listaDivisas = document.getElementById("lista-divisas");
+      const resultadoCotizacion = document.getElementById(
+        "resultado-cotizacion"
+      );
 
-        // Función para mostrar la lista de divisas
-        function mostrarListaDivisas() {
-            listaDivisas.classList.remove('oculto');
-            listaDivisas.classList.add('visible');
-            listaDivisas.innerHTML = '';
-            const valorBuscador = buscadorInput.value.toLowerCase();
-            divisas.forEach(divisa => {
-                if (divisa.toLowerCase().includes(valorBuscador)) {
-                    const div = document.createElement('div');
-                    div.textContent = divisa;
-                    div.addEventListener('click', async () => {
-                        mostrarSpinner();
-                        const simbolo = divisa.split(' - ')[0];
-                        try {
-                            const cotizacion = await obtenerCotizacion(simbolo);
-                            resultadoCotizacion.innerHTML = `
+      // Función para mostrar la lista de divisas
+      function mostrarListaDivisas() {
+        listaDivisas.classList.remove("oculto");
+        listaDivisas.classList.add("visible");
+        listaDivisas.innerHTML = "";
+        const valorBuscador = buscadorInput.value.toLowerCase();
+        divisas.forEach((divisa) => {
+          if (divisa.toLowerCase().includes(valorBuscador)) {
+            const div = document.createElement("div");
+            div.textContent = divisa;
+            div.addEventListener("click", async () => {
+              mostrarSpinner();
+              const simbolo = divisa.split(" - ")[0];
+              try {
+                const cotizacion = await obtenerCotizacion(simbolo);
+                resultadoCotizacion.innerHTML = `
                                 <div class="resultado-card">
                                     <div class="resultado-header">Cotización de ${simbolo}</div>
                                     <div class="resultado-body">
@@ -333,60 +347,62 @@
                                         Última actualización: ${new Date().toLocaleString()}
                                     </div>
                                 </div>`;
-                        } catch (error) {
-                            resultadoCotizacion.innerHTML = `
+              } catch (error) {
+                resultadoCotizacion.innerHTML = `
                                 <div class="error-message">
                                     Error al obtener la cotización. Inténtelo de nuevo más tarde.
                                 </div>`;
-                        } finally {
-                            ocultarSpinner();
-                        }
-                    });
-                    listaDivisas.appendChild(div);
-                }
+              } finally {
+                ocultarSpinner();
+              }
             });
+            listaDivisas.appendChild(div);
+          }
+        });
+      }
+
+      function mostrarSpinner() {
+        resultadoCotizacion.innerHTML = '<div class="loading-spinner"></div>';
+      }
+
+      function ocultarSpinner() {
+        const spinner = document.querySelector(".loading-spinner");
+        if (spinner) {
+          spinner.remove();
         }
+      }
 
-        function mostrarSpinner() {
-            resultadoCotizacion.innerHTML = '<div class="loading-spinner"></div>';
+      buscadorInput.addEventListener("input", mostrarListaDivisas);
+
+      function ocultarListaDivisas() {
+        if (!buscadorInput.value) {
+          listaDivisas.classList.remove("visible");
+          listaDivisas.classList.add("oculto");
         }
+      }
 
-        function ocultarSpinner() {
-            const spinner = document.querySelector('.loading-spinner');
-            if (spinner) {
-                spinner.remove();
-            }
+      // Mostrar todas las divisas al cargar la página
+      mostrarListaDivisas();
+
+      // Función para obtener la cotización de una divisa
+      async function obtenerCotizacion(simbolo) {
+        const apiKey = "55f56fac8fa6472cbbdd03b5"; // Reemplaza con tu clave API
+        const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(
+            `Error en la solicitud: ${response.status} ${response.statusText}`
+          );
         }
-
-        buscadorInput.addEventListener('input', mostrarListaDivisas);
-
-        function ocultarListaDivisas() {
-            if (!buscadorInput.value) {
-                listaDivisas.classList.remove('visible');
-                listaDivisas.classList.add('oculto');
-            }
+        const data = await response.json();
+        const cotizacion = data.conversion_rates[simbolo];
+        if (cotizacion) {
+          return cotizacion.toFixed(2); // Redondear a 2 decimales
+        } else {
+          throw new Error(`No se pudo obtener la cotización para ${simbolo}`);
         }
-
-        // Mostrar todas las divisas al cargar la página
-        mostrarListaDivisas();
-
-        // Función para obtener la cotización de una divisa
-        async function obtenerCotizacion(simbolo) {
-            const apiKey = '55f56fac8fa6472cbbdd03b5'; // Reemplaza con tu clave API
-            const url = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
-
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-            }
-            const data = await response.json();
-            const cotizacion = data.conversion_rates[simbolo];
-            if (cotizacion) {
-                return cotizacion.toFixed(2); // Redondear a 2 decimales
-            } else {
-                throw new Error(`No se pudo obtener la cotización para ${simbolo}`);
-            }
-        }
+      }
     </script>
-</body>
+  </body>
 </html>

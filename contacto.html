@@ -1,192 +1,247 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"
+    ></script>
+    <script
+      type="module"
+      src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"
+    ></script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            position: relative; /* Añadir posición relativa para el contenedor del menú */
-        }
-        .contact-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            max-width: 400px;
-            width: 100%;
-        }
-        .contact-header {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        .contact-header h1 {
-            font-size: 1.75rem;
-            margin: 0;
-            color: #333;
-        }
-        .contact-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-        .contact-form button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-        }
-        .contact-form button:hover {
-            background-color: #0056b3;
-        }
-        /* Estilos para el menú desplegable */
-        .menu {
-            position: absolute; /* Cambia a posición absoluta */
-            top: 2rem; /* Ajusta la distancia desde la parte superior */
-            right: 5rem; /* Ajusta la distancia desde la derecha */
-            display: inline-block;
-        }
-        .menu-boton {
-            background-color: #3b82f6; /* Fondo azul */
-            color: white; /* Texto blanco */
-            padding: 0.75rem 1.5rem; /* Espaciado interior */
-            font-size: 1rem; /* Tamaño de fuente */
-            font-weight: 600; /* Negrita */
-            border: none; /* Sin borde */
-            border-radius: 0.475rem; /* Bordes redondeados */
-            cursor: pointer; /* Cursor de mano */
-            transition: background-color 0.2s ease; /* Transición suave */
-        }
-        .menu-boton:hover {
-            background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
-        }
-        .menu-contenido {
-            display: none; /* Oculto por defecto */
-            position: absolute;
-            background-color: white; /* Fondo blanco */
-            min-width: 12rem; /* Ancho mínimo */
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
-            border-radius: 0.375rem; /* Bordes redondeados */
-            z-index: 1; /* Asegurar que esté por encima de otros elementos */
-            top: 100%; /* Desplegar el contenido del menú por debajo del botón */
-            right: 0; /* Alinear el contenido del menú a la derecha */
-        }
-        .menu-contenido a {
-            color: #1a202c; /* Color de texto oscuro */
-            padding: 1rem; /* Espaciado interior */
-            text-decoration: none; /* Sin subrayado */
-            display: block; /* Mostrar como bloque */
-            font-weight: 600; /* Negrita */
-        }
-        .menu-contenido a:hover {
-            background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
-        }
-        .menu:hover .menu-contenido {
-            display: block; /* Mostrar menú al pasar el mouse */
-        }
-        .menu:hover .menu-boton {
-            background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
-        }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: relative; /* Añadir posición relativa para el contenedor del menú */
+      }
+      .contact-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        max-width: 400px;
+        width: 100%;
+      }
+      .contact-header {
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+      .contact-header h1 {
+        font-size: 1.75rem;
+        margin: 0;
+        color: #333;
+      }
+      .contact-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #555;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+      .contact-form button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 0.75rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        width: 100%;
+      }
+      .contact-form button:hover {
+        background-color: #0056b3;
+      }
+      /* Estilos para el menú desplegable */
+      .menu {
+        position: absolute; /* Cambia a posición absoluta */
+        top: 2rem; /* Ajusta la distancia desde la parte superior */
+        right: 5rem; /* Ajusta la distancia desde la derecha */
+        display: inline-block;
+      }
+      .menu-boton {
+        background-color: #3b82f6; /* Fondo azul */
+        color: white; /* Texto blanco */
+        padding: 0.75rem 1.5rem; /* Espaciado interior */
+        font-size: 1rem; /* Tamaño de fuente */
+        font-weight: 600; /* Negrita */
+        border: none; /* Sin borde */
+        border-radius: 0.475rem; /* Bordes redondeados */
+        cursor: pointer; /* Cursor de mano */
+        transition: background-color 0.2s ease; /* Transición suave */
+      }
+      .menu-boton:hover {
+        background-color: #2563eb; /* Fondo azul más oscuro al pasar el mouse */
+      }
+      .menu-contenido {
+        display: none; /* Oculto por defecto */
+        position: absolute;
+        background-color: white; /* Fondo blanco */
+        min-width: 12rem; /* Ancho mínimo */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra */
+        border-radius: 0.375rem; /* Bordes redondeados */
+        z-index: 1; /* Asegurar que esté por encima de otros elementos */
+        top: 100%; /* Desplegar el contenido del menú por debajo del botón */
+        right: 0; /* Alinear el contenido del menú a la derecha */
+      }
+      .menu-contenido a {
+        color: #1a202c; /* Color de texto oscuro */
+        padding: 1rem; /* Espaciado interior */
+        text-decoration: none; /* Sin subrayado */
+        display: block; /* Mostrar como bloque */
+        font-weight: 600; /* Negrita */
+      }
+      .menu-contenido a:hover {
+        background-color: #f1f1f1; /* Fondo gris claro al pasar el mouse */
+      }
+      .menu:hover .menu-contenido {
+        display: block; /* Mostrar menú al pasar el mouse */
+      }
+      .menu:hover .menu-boton {
+        background-color: #2563eb; /* Mantener el color del botón al pasar el mouse sobre el menú */
+      }
+      /* Estilos para el mensaje de éxito */
+      .message-success {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        padding: 0.75rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1rem;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Menu de navegación -->
-    <div style="position: absolute; top: 1rem; right: 1rem;">
-        <div class="menu">
-            <button class="menu-boton">Menú</button>
-            <div class="menu-contenido">
-                <a href="buscador.html">Buscador</a>
-                <a href="noticias.html">Noticias</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="iniciarsesion.html">Iniciar Sesion</a>
-            </div>
+    <div style="position: absolute; top: 1rem; right: 1rem">
+      <div class="menu">
+        <button class="menu-boton">Menú</button>
+        <div class="menu-contenido">
+          <a href="buscador.html">Buscador</a>
+          <a href="noticias.html">Noticias</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="iniciarsesion.html">Iniciar Sesion</a>
         </div>
+      </div>
     </div>
 
     <div class="contact-container">
-        <div class="contact-header">
-            <h1>Contacto</h1>
+      <div class="contact-header">
+        <h1>Contacto</h1>
+      </div>
+      <form id="contactForm" class="contact-form">
+        <label for="nombre">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          placeholder="Tu nombre"
+          required
+        />
+        <label for="email">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Tu correo electrónico"
+          required
+        />
+        <label for="mensaje">Mensaje</label>
+        <textarea
+          id="mensaje"
+          name="mensaje"
+          rows="5"
+          placeholder="Tu mensaje"
+          required
+        ></textarea>
+        <div id="messageSuccess" class="message-success" style="display: none">
+          Mensaje enviado con éxito
         </div>
-        <form id="contactForm" class="contact-form">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
-            <label for="email">Correo Electrónico</label>
-            <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
+        <button type="submit">Enviar</button>
+      </form>
     </div>
     <script type="module">
-        // Inicializar Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+      // Inicializar Firebase
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        push,
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
-            authDomain: "cotizaciones-hoy.firebaseapp.com",
-            databaseURL: "https://cotizaciones-hoy-default-rtdb.firebaseio.com",
-            projectId: "cotizaciones-hoy",
-            storageBucket: "cotizaciones-hoy.firebasestorage.app",
-            messagingSenderId: "104412367418",
-            appId: "1:104412367418:web:0962a9c13738e088610303",
-            measurementId: "G-R5KRC3LZ70"
-        };
+      const firebaseConfig = {
+        apiKey: "AIzaSyChpFnp833eYISgcOBCmrmqb0a2iLy82WU",
+        authDomain: "cotizaciones-hoy.firebaseapp.com",
+        databaseURL: "https://cotizaciones-hoy-default-rtdb.firebaseio.com",
+        projectId: "cotizaciones-hoy",
+        storageBucket: "cotizaciones-hoy.firebasestorage.app",
+        messagingSenderId: "104412367418",
+        appId: "1:104412367418:web:0962a9c13738e088610303",
+        measurementId: "G-R5KRC3LZ70",
+      };
 
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        console.log('Firebase inicializado');
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      console.log("Firebase inicializado");
 
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            console.log('Formulario enviado');
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          console.log("Formulario enviado");
 
-            const formData = new FormData(this);
-            const data = {
-                nombre: formData.get('nombre'),
-                email: formData.get('email'),
-                mensaje: formData.get('mensaje'),
-                timestamp: new Date().toISOString()
-            };
+          const formData = new FormData(this);
+          const data = {
+            nombre: formData.get("nombre"),
+            email: formData.get("email"),
+            mensaje: formData.get("mensaje"),
+            timestamp: new Date().toISOString(),
+          };
 
-            console.log('Datos del formulario:', data);
+          console.log("Datos del formulario:", data);
 
-            // Guardar los datos en Firebase Realtime Database en la clave "contactMessagesData"
-            const contactMessagesRef = ref(database, 'contactMessagesData');
-            push(contactMessagesRef, data)
+          // Guardar los datos en Firebase Realtime Database en la clave "contactMessagesData"
+          const contactMessagesRef = ref(database, "contactMessagesData");
+          push(contactMessagesRef, data)
             .then(() => {
-                console.log('Datos guardados en Firebase');
-                alert('Mensaje enviado y guardado exitosamente');
+              console.log("Datos guardados en Firebase");
+              // Mostrar el mensaje de éxito y ocultar el formulario
+              document.getElementById("messageSuccess").style.display = "block";
+              setTimeout(() => {
+                document.getElementById("messageSuccess").style.display =
+                  "none";
+              }, 5000); // Ocultar el mensaje después de 5 segundos
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al enviar el mensaje');
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Error al enviar el mensaje");
             });
         });
     </script>
-</body>
+  </body>
 </html>
